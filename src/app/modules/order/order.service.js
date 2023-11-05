@@ -13,9 +13,19 @@ export const createOrderService = async (payload) => {
   }
   return newOrder;
 };
-//-----------get all order
+//-----------get all order by user
 export const getAllOrderByUserService = async (id) => {
   const orders = await Order.find({orderedBy: id});
+  return orders;
+};
+//-----------get all order
+export const getAllOrderService = async () => {
+  const orders = await Order.find({});
+  return orders;
+};
+//-----------get orders by status
+export const getOrdersByStatusService = async (status, orderedBy) => {
+  const orders = await Order.find({status, orderedBy});
   return orders;
 };
 
