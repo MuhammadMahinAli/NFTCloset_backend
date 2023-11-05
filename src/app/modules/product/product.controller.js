@@ -13,6 +13,7 @@ import {sortingFields} from "../../../utils/sortingHelper.js";
 import {getProductsByPriceService} from "./services/getProductsByPrice.js";
 import {updateProductService} from "./services/updateProduct.js";
 import {paginationFields} from "../../../utils/pagination.js";
+import {getProductsBySellerService} from "./services/getProductsBySeller.js";
 
 //create a product
 export const createProduct = catchAsync(async (req, res, next) => {
@@ -81,6 +82,18 @@ export const getProductsByCollection = catchAsync(async (req, res) => {
 export const getProductsByUser = catchAsync(async (req, res) => {
   const id = req?.params?.id;
   const products = await getProductsByUserService(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Products retrieved successfully!",
+    data: products,
+  });
+});
+//------get products by seller
+export const getProductsBySeller = catchAsync(async (req, res) => {
+  const id = req?.params?.id;
+  const products = await getProductsBySellerService(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

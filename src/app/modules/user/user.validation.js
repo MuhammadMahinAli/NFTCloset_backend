@@ -25,9 +25,7 @@ export const createUserZodSchema = z.object({
       phoneNumber: z.string({
         required_error: "Phone Number is required",
       }),
-      address: z.string({
-        required_error: "Address is required",
-      }),
+      address: z.string().optional(),
       role: z.enum([...roleEnums], {
         required_error: "Role is required",
       }),
