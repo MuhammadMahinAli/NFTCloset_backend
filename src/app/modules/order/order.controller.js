@@ -40,7 +40,7 @@ export const getAllOrder = catchAsync(async (req, res) => {
 });
 //-------get Orders by status
 export const getOrdersByStatus = catchAsync(async (req, res) => {
-  const {status, orderedBy} = req?.body;
+  const {status, orderedBy} = req?.query;
   const orders = await getOrdersByStatusService(status, orderedBy);
 
   sendResponse(res, {
