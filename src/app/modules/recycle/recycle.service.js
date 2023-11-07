@@ -60,11 +60,21 @@ export const deleteRecycleService = async (id) => {
 };
 //----------get all recycle
 export const getAllRecycleService = async () => {
-  const recycles = await Recycle.find({});
+  const recycles = await Recycle.find({}).populate({
+    path: "products",
+    populate: {
+      path: "productID",
+    },
+  });
   return recycles;
 };
 //----------get single recycle
 export const getSingleRecycleService = async (id) => {
-  const recycle = await Recycle.findOne({requestedBy: id});
+  const recycle = await Recycle.findOne({requestedBy: id}).populate({
+    path: "products",
+    populate: {
+      path: "productID",
+    },
+  });
   return recycle;
 };
