@@ -54,8 +54,12 @@ export const createProductZodSchema = z.object({
         availability: z.boolean({
           required_error: "availability is required",
         }),
+        certified: z.boolean({
+          required_error: "certified is required",
+        }),
 
         addedBy: z.string({required_error: "Added by is required"}),
+        artist: z.string({required_error: "artist is required"}),
       }),
       versions: z.array(
         z.object({

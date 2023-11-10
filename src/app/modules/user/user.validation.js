@@ -48,6 +48,9 @@ export const updateUserZodSchema = z.object({
       email: z.string().email().optional(),
       phoneNumber: z.string().optional(),
       address: z.string().optional(),
+      country: z.string().optional(),
+      city: z.string().optional(),
+      zipCode: z.string().optional(),
       role: z.enum([...roleEnums]).optional(),
       productsOwnerShip: z.string().optional(),
     })

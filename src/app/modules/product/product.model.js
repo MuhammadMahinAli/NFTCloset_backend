@@ -143,6 +143,10 @@ const ProductSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    listed: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
