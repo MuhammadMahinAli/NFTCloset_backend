@@ -18,26 +18,31 @@ export const createCartService = async (payload) => {
 
 //-----------get single cart
 export const getSingleCartService = async (id) => {
-  const cart = await Cart.findOne({user: id});
+  const cart = await Cart.findOne({user: id}).populate({
+    path: "products",
+    populate: {
+      path: "productID",
+    },
+  });
   return cart;
 };
 
 //---------add product to cart
-export const addProductToCartService = async (user, product) => {
+export const addProductToCartService = async (user, newProduct) => {
   //checking cart exist
   const existingCart = await Cart.findOne({user: user});
   if (!existingCart) {
     throw new ApiError(httpStatus.NOT_FOUND, "Cart doesn't found");
   }
   //checking product exist
-  const productExist = existingCart.products?.find((product) => product.productID.toString() === product.productID.toString());
+  const productExist = existingCart.products?.find((product) => product?.productID.toString() === newProduct?.productID.toString());
   let result = null;
   if (productExist) {
-    const newQuantity = productExist.quantity + product.quantity;
+    const newQuantity = productExist.quantity + newProduct.quantity;
     result = await Cart.findOneAndUpdate(
       {
         user: user,
-        "products.productID": product.productID,
+        "products.productID": newProduct.productID,
       },
       {
         $set: {"products.$.quantity": newQuantity},
@@ -47,7 +52,7 @@ export const addProductToCartService = async (user, product) => {
   } else {
     result = await Cart.findOneAndUpdate(
       {user: user},
-      {$push: {products: product}},
+      {$push: {products: newProduct}},
       {
         new: true,
       }
