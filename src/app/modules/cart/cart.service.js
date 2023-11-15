@@ -31,12 +31,16 @@ export const getSingleCartService = async (id) => {
 export const addProductToCartService = async (user, newProduct) => {
   //checking cart exist
   const existingCart = await Cart.findOne({user: user});
-  if (!existingCart) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Cart doesn't found");
-  }
   //checking product exist
   const productExist = existingCart.products?.find((product) => product?.productID.toString() === newProduct?.productID.toString());
   let result = null;
+  if (!existingCart) {
+    const cartData = {
+      products: [product],
+      user,
+    };
+    result = await Cart.create(cartData);
+  }
   if (productExist) {
     const newQuantity = productExist.quantity + newProduct.quantity;
     result = await Cart.findOneAndUpdate(

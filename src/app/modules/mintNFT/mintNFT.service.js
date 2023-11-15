@@ -9,5 +9,5 @@ export const createMintNFTService = async (data) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create nft");
   }
 
-  return result;
+  return newNFT;
 };
