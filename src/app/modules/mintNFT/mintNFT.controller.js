@@ -15,4 +15,15 @@ export const createMintNFT = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
+// //------ minted nft by crossmint
+// export const mintNFTByCrossmint = catchAsync(async (req, res, next) => {
+//   const {CID, wallet} = req.body;
+//   const result = await mintNFTByCrossmintService(CID, wallet);
 
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: "NFt minting by crossmint request send successfully!",
+//     data: result,
+//   });
+// });

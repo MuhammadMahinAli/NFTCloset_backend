@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 dotenv.config({path: path.join(process.cwd(), ".env")});
-const {NODE_ENV, PORT, DATABASE_URL, DEFAULT_USER_PASS, BCRYPT_SALT_ROUNDS, JWT_SECRET, JWT_REFRESH_SECRET, JWT_EXPIRES_IN, JWT_REFRESH_EXPIRES_IN, COM_EMAIL, COM_PASS} = process.env;
+const {NODE_ENV, PORT, DATABASE_URL, DEFAULT_USER_PASS, BCRYPT_SALT_ROUNDS, JWT_SECRET, JWT_REFRESH_SECRET, JWT_EXPIRES_IN, JWT_REFRESH_EXPIRES_IN, COM_EMAIL, COM_PASS, CROSSMINT_PROJECT_ID, CROSSMINT_CLIENT_SECRET} = process.env;
 export default {
   env: NODE_ENV,
   port: PORT,
@@ -11,6 +11,8 @@ export default {
   bcrypt_salt_rounds: BCRYPT_SALT_ROUNDS,
   company_email: COM_EMAIL,
   company_pass: COM_PASS,
+  crossmint_project_id: CROSSMINT_PROJECT_ID,
+  crossmint_client_secret: CROSSMINT_CLIENT_SECRET,
   jwt: {
     secret: JWT_SECRET,
     refresh_secret: JWT_REFRESH_SECRET,
