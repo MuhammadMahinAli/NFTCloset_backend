@@ -40,4 +40,4 @@ const mintNFTByCrossmintService = async () => {
     console.log(error);
   }
 };
-mintNFTByCrossmintService();
+// mintNFTByCrossmintService();
