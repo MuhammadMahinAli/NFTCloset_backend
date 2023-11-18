@@ -27,11 +27,8 @@ export const createMintNFTZodSchema = z.object({
 export const updateMintNFTZodSchema = z.object({
   body: z
     .object({
-      title: z.string().optional(),
+      CID: z.string().optional(),
       description: z.string().optional(),
-      price: z.number().optional(),
-      artist: z.string().optional(),
-      image: z.string().optional(),
     })
     .strict(),
 });

@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {createMintNFTService} from "./mintNFT.service.js";
+import {createMintNFTService, mintNFTByCrossmintService} from "./mintNFT.service.js";
 
 //------create an minted nft
 export const createMintNFT = catchAsync(async (req, res, next) => {
@@ -16,14 +16,14 @@ export const createMintNFT = catchAsync(async (req, res, next) => {
   });
 });
 // //------ minted nft by crossmint
-// export const mintNFTByCrossmint = catchAsync(async (req, res, next) => {
-//   const {CID, wallet} = req.body;
-//   const result = await mintNFTByCrossmintService(CID, wallet);
+export const mintNFTByCrossmint = catchAsync(async (req, res, next) => {
+  const {CID, wallet} = req.body;
+  const result = await mintNFTByCrossmintService(CID, wallet);
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: "NFt minting by crossmint request send successfully!",
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "NFt minting by crossmint request send successfully!",
+    data: result,
+  });
+});
