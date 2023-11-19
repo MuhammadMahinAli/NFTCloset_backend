@@ -32,11 +32,11 @@ export const addProductToCartService = async (user, newProduct) => {
   //checking cart exist
   const existingCart = await Cart.findOne({user: user});
   //checking product exist
-  const productExist = existingCart.products?.find((product) => product?.productID.toString() === newProduct?.productID.toString());
+  const productExist = existingCart?.products?.find((product) => product?.productID.toString() === newProduct?.productID.toString());
   let result = null;
   if (!existingCart) {
     const cartData = {
-      products: [product],
+      products: [newProduct],
       user,
     };
     result = await Cart.create(cartData);
