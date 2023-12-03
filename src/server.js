@@ -3,7 +3,7 @@ import app from "./app.js";
 import config from "./config/index.js";
 import {recycleAutomation} from "./utils/automation.js";
 
-const port = config.port || 5000;
+const port = config.port || 3000;
 let server;
 //uncaught exception handle
 process.on("uncaughtException", (err) => {

@@ -14,17 +14,13 @@ export const createMintNFTService = async (data) => {
 };
 
 //mint nft by croosmint
-const mintNFTByCrossmintService = async () => {
+export const mintNFTByCrossmintService = async (CID, wallet) => {
   const data = JSON.stringify({
-    recipient: `polygon:0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1`,
-    metadata: {
-      name: "Proof of Attendance",
-      image: "https://www.example.com/assets/thanks_for_attending.png",
-      description: "Proof of Attendance to ACME Inc Tech Event",
-    },
+    recipient: `polygon:${wallet}`,
+    metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
   });
   try {
-    const response = await fetch("https://staging.crossmint.com/api/2022-06-09/collections/default/nfts", {
+    const response = await fetch("https://staging.crossmint.com/api/2022-06-09/collections/default-polygon/nfts", {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -34,10 +30,31 @@ const mintNFTByCrossmintService = async () => {
       },
       body: data,
     });
-    console.log(JSON.stringify(response));
-    return response;
+    const res = await response.json();
+    console.log(JSON.stringify(res));
+    return res;
   } catch (error) {
     console.log(error);
   }
 };
 // mintNFTByCrossmintService();
+//0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1
+export const getAllNFTService = async (wallet) => {
+  try {
+    const url = `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "X-CLIENT-SECRET": config.crossmint_client_secret,
+        "X-PROJECT-ID": config.crossmint_project_id,
+      },
+    };
+    const result = await fetch(url, options);
+    const res = await result.json();
+    return res;
+  } catch (error) {
+    console.log(error);
+    throw new ApiError(httpStatus.BAD_REQUEST, "Cannot get NFTs!");
+  }
+};

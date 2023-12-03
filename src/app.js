@@ -5,7 +5,6 @@ import router from "./app/routes/index.js";
 import {globalErrorHandler} from "./app/middlewars/gloalErrorHandler.js";
 
 const app = express();
-
 //
 app.use(cors());
 
