@@ -3,6 +3,7 @@ import {ApiError} from "../../../handleError/apiError.js";
 import {Collection} from "./collection.model.js";
 import {collectionSearchableFields, generateCollectionID} from "./collection.utils.js";
 import {sortingHelper} from "../../../utils/sortingHelper.js";
+import { ZodFirstPartyTypeKind } from "zod";
 
 //----------create a new collection
 export const createCollectionService = async (payload) => {
@@ -66,6 +67,7 @@ export const updateCollectionService = async (id, payload) => {
   });
   return result;
 };
+
 //---------add product to collection
 export const addProductToCollectionService = async (id, product, session) => {
   const isExist = await Collection.findOne({_id: id});

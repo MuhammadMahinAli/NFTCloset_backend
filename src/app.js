@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 ////use route
-app.use("/api/v1", router);
+app.use("/api/v1", router); 
 //
 app.get("/", (req, res) => {
   res.send("Server is Listening..");
@@ -32,3 +32,4 @@ app.use((req, res, next) => {
   next();
 });
 export default app;
+
