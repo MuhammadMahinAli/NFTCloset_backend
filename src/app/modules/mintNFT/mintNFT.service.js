@@ -38,19 +38,23 @@ export const mintNFTByCrossmintService = async (CID, wallet) => {
   }
 };
 // mintNFTByCrossmintService();
-const getNFTs = async () => {
-  const url = "https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1/nfts";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      "X-CLIENT-SECRET": config.crossmint_client_secret,
-      "X-PROJECT-ID": config.crossmint_project_id,
-    },
-  };
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error("error:" + err));
+//0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1
+export const getAllNFTService = async (wallet) => {
+  try {
+    const url = `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "X-CLIENT-SECRET": config.crossmint_client_secret,
+        "X-PROJECT-ID": config.crossmint_project_id,
+      },
+    };
+    const result = await fetch(url, options);
+    const res = await result.json();
+    return res;
+  } catch (error) {
+    console.log(error);
+    throw new ApiError(httpStatus.BAD_REQUEST, "Cannot get NFTs!");
+  }
 };
-// getNFTs();
