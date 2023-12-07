@@ -1,6 +1,6 @@
 import {z} from "zod";
 //user roles
-const roleEnums = ["Admin", "Seller", "Buyer"];
+const roleEnums = ["Admin", "Seller", "Buyer", "Designer"];
 //
 export const createUserZodSchema = z.object({
   body: z
