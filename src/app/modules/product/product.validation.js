@@ -17,17 +17,15 @@ export const createProductZodSchema = z.object({
         quantity: z.number({
           required_error: "quantity is required",
         }),
-        collections: z.array(
-          z.object({
-            name: z.string({
-              required_error: "name is required",
-            }),
+        collections: z
+          .array(
+            z.object({
+              name: z.string().optional(),
 
-            collectionID: z.string({
-              required_error: "collectionID is required",
-            }),
-          })
-        ),
+              collectionID: z.string().optional(),
+            })
+          )
+          .optional(),
         colors: z
           .array(
             z.object({
@@ -77,6 +75,7 @@ export const createProductZodSchema = z.object({
           weight: z.string().optional(),
           status: z.enum([...statusEnums]).optional(),
           dimension: z.string().optional(),
+          image: z.string().optional(),
         })
       ),
     })

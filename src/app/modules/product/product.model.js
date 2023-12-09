@@ -149,7 +149,7 @@ const ProductSchema = new Schema(
     },
     listed: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {
