@@ -68,3 +68,7 @@ export const getProductsByVersionService = async (id) => {
   });
   return version?.products;
 };
+export const getSingleVersionService = async (title) => {
+  const version = await Version.findOne({title});
+  return version;
+};

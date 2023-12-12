@@ -46,6 +46,9 @@ const VersionSchema = new Schema(
           supplyChain: {
             type: String,
           },
+          image: {
+            type: String,
+          },
         },
       },
     ],
