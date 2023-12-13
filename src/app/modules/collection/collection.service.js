@@ -3,14 +3,30 @@ import {ApiError} from "../../../handleError/apiError.js";
 import {Collection} from "./collection.model.js";
 import {collectionSearchableFields, generateCollectionID} from "./collection.utils.js";
 import {sortingHelper} from "../../../utils/sortingHelper.js";
+import {addCollectionToProductService} from "../product/services/addCollectionToProduct.js";
 
 //----------create a new collection
 export const createCollectionService = async (payload) => {
   const collectionID = await generateCollectionID();
   const data = {collectionID, ...payload};
   const newCollection = await Collection.create(data);
+
   if (!newCollection) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create collection");
+  }
+  if (payload?.products?.length > 0) {
+    console.log(payload?.products);
+    // Make sure payload.products is an array before proceeding
+    if (Array.isArray(payload.products)) {
+      await Promise.all(
+        payload.products.map(async (product) => {
+          await addCollectionToProductService({product, collection: {name: payload.title, collectionID: newCollection?._id}});
+          // increasing quantity after adding product
+          newCollection.quantity++;
+        })
+      );
+    }
+    await newCollection.save();
   }
   return newCollection;
 };
@@ -51,7 +67,7 @@ export const getAllCollectionService = async (filters, sortingOptions) => {
 
 //-----------get single collection
 export const getSingleCollectionService = async (id) => {
-  const collection = await Collection.findOne({collectionID: id});
+  const collection = await Collection.findOne({_id: id});
   return collection;
 };
 //-----------update collection

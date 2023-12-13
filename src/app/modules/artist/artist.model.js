@@ -20,6 +20,10 @@ const ArtistSchema = new Schema(
       type: String,
       required: true,
     },
+    createDateOfArt: {
+      type: String,
+      required: true,
+    },
     document: {
       type: String,
       required: true,
