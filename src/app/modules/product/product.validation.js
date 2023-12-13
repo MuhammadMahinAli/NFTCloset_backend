@@ -14,20 +14,15 @@ export const createProductZodSchema = z.object({
         sku: z.string({
           required_error: "SKU is required",
         }),
-        quantity: z.number({
-          required_error: "quantity is required",
-        }),
-        collections: z.array(
-          z.object({
-            name: z.string({
-              required_error: "name is required",
-            }),
-
-            collectionID: z.string({
-              required_error: "collectionID is required",
-            }),
-          })
-        ),
+        quantity: z.number().optional(),
+        collections: z
+          .array(
+            z.object({
+              name: z.string().optional(),
+              collectionID: z.string().optional(),
+            })
+          )
+          .optional(),
         colors: z
           .array(
             z.object({
@@ -47,20 +42,29 @@ export const createProductZodSchema = z.object({
         owners: z.array(z.string()).optional(),
         image: z.string().optional(),
 
-        volume: z.string().optional(),
+        // volume: z.string().optional(),
+        // dimension: z.string().optional(),
         market_X: z.boolean({
           required_error: "market_X is required",
         }),
         availability: z.boolean({
           required_error: "availability is required",
         }),
-        certified: z.boolean({
-          required_error: "certified is required",
+        certificateReq: z.enum(["pending", "approved", "rejected", "Not requested"], {
+          required_error: "certificateReq is required",
         }),
 
         addedBy: z.string({required_error: "Added by is required"}),
-        artist: z.string({required_error: "artist is required"}),
       }),
+      artist: z
+        .object({
+          artistName: z.string().optional(),
+          artistAddress: z.string().optional(),
+          createDateOfArt: z.string().optional(),
+          artistPhone: z.string().optional(),
+          artistDocument: z.string().optional(),
+        })
+        .optional(),
       versions: z.array(
         z.object({
           name: z.string({
@@ -77,6 +81,7 @@ export const createProductZodSchema = z.object({
           weight: z.string().optional(),
           status: z.enum([...statusEnums]).optional(),
           dimension: z.string().optional(),
+          image: z.string().optional(),
         })
       ),
     })

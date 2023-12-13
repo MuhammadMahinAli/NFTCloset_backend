@@ -5,12 +5,11 @@ import {Product} from "../product.model.js";
 import httpStatus from "http-status";
 import {ApiError} from "../../../../handleError/apiError.js";
 import {addProductToCollections} from "../../collection/collection.utils.js";
-
-import {User} from "../../user/user.model.js";
+import {createArtistService} from "../../artist/artist.service.js";
 
 //------create a new product
 export const createProductService = async (body) => {
-  const {payload, versions: bodyVersions} = body;
+  const {payload, versions: bodyVersions, artist} = body;
   let newProductData = null;
   const session = await mongoose.startSession();
   try {
@@ -28,22 +27,14 @@ export const createProductService = async (body) => {
     await addProductToCollections(payload?.collections, newProductId, session);
     //adding this product to the versions
     await addProductToDifferentVersions(newProductId, bodyVersions, session);
-    newProductData = newProduct[0];
-    // //creating certificate if need this
-    // if (payload.certified) {
-    //   const artist = await User.findOne({_id: payload?.artist});
-    //   //generating pdf of certificate
-    //   await generatePDF({name: `${artist?.name?.firstName} ${artist?.name?.lastName}`, itemName: payload?.title});
-    //   const base64Pdf = readFileSync("certificate/certificate.pdf", {encoding: "base64"});
-
-    //   artist.certificate = base64Pdf;
-    //   await artist.save({session});
-    //   //sending mail to the artist
-    //   const mailOptions = generateMailOptions({name: `${artist?.name?.firstName} ${artist?.name?.lastName}`, email: "isratkws@gmail.com"});
-    //   await transporter.sendMail(mailOptions);
-    //   //deleting pdf after send to artist
-    //   unlinkSync("certificate/certificate.pdf");
-    // }
+    //creating artist of this product
+    if (artist && artist.artistName !== "") {
+      const newArtist = await createArtistService({product: newProductId, artist});
+      newProductData = newProduct[0];
+      //setting artist to product
+      newProductData.artist = newArtist?._id;
+      await newProductData.save({session});
+    }
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {

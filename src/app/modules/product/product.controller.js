@@ -14,6 +14,8 @@ import {getProductsByPriceService} from "./services/getProductsByPrice.js";
 import {updateProductService} from "./services/updateProduct.js";
 import {paginationFields} from "../../../utils/pagination.js";
 import {getProductsBySellerService} from "./services/getProductsBySeller.js";
+import {certifyProductService} from "./services/certifyProduct.js";
+import {rejectCertificationService} from "./services/rejectCertification.js";
 
 //create a product
 export const createProduct = catchAsync(async (req, res, next) => {
@@ -126,5 +128,22 @@ export const updateProduct = catchAsync(async (req, res) => {
     success: true,
     message: "Product updated successfully!",
     data: updatedProduct,
+  });
+});
+////-------certify or reject product
+export const certifyOrRejectProduct = catchAsync(async (req, res) => {
+  const {certify, ...updateData} = req?.body;
+  let result;
+  if (certify) {
+    result = await certifyProductService(updateData);
+  } else {
+    result = await rejectCertificationService(updateData);
+  }
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Product ${certify ? "certified" : "certification rejected"} successfully!`,
+    data: result,
   });
 });

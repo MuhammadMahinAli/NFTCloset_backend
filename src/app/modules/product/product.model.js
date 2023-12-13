@@ -23,7 +23,7 @@ const ProductSchema = new Schema(
     },
     quantity: {
       type: Number,
-      required: true,
+      // required: true,
     },
     collections: [
       {
@@ -93,6 +93,10 @@ const ProductSchema = new Schema(
             type: Number,
             required: true,
           },
+          image: {
+            type: String,
+            required: true,
+          },
         },
         required: true,
       },
@@ -103,19 +107,22 @@ const ProductSchema = new Schema(
       default: 0,
     },
     image: {type: String},
-    volume: {
-      type: String,
-    },
+    // volume: {
+    //   type: String,
+    // },
+    // dimension: {
+    //   type: String,
+    // },
     addedBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    addStatus: {
-      type: String,
-      default: "pending",
-      enum: ["pending", "approved", "rejected"],
-    },
+    // addStatus: {
+    //   type: String,
+    //   default: "pending",
+    //   enum: ["pending", "approved", "rejected"],
+    // },
     market_X: {
       type: Boolean,
       required: true,
@@ -143,9 +150,18 @@ const ProductSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    listed: {
+    artist: {
+      type: Schema.Types.ObjectId,
+      ref: "Artist",
+    },
+    certified: {
       type: Boolean,
       default: false,
+    },
+    certificateReq: {
+      type: String,
+      default: "Not requested",
+      enum: ["pending", "approved", "rejected", "Not requested"],
     },
   },
   {

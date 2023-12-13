@@ -148,3 +148,8 @@ export const addOwnerToCollectionService = async (id, owner, session) => {
   await updatedCollection.save({session});
   return updatedCollection;
 };
+
+export const getCollectionsBySellerService = async (id) => {
+  const collections = await Collection.find({addedBy: id});
+  return collections;
+};
