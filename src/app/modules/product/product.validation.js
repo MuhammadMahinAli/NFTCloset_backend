@@ -58,11 +58,12 @@ export const createProductZodSchema = z.object({
       }),
       artist: z
         .object({
-          artistName: z.string().optional(),
-          artistAddress: z.string().optional(),
+          name: z.string().optional(),
+          email: z.string().optional(),
+          address: z.string().optional(),
           createDateOfArt: z.string().optional(),
-          artistPhone: z.string().optional(),
-          artistDocument: z.string().optional(),
+          phoneNumber: z.string().optional(),
+          document: z.string().optional(),
         })
         .optional(),
       versions: z.array(

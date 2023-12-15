@@ -29,7 +29,7 @@ export const createProductService = async (body) => {
     await addProductToDifferentVersions(newProductId, bodyVersions, session);
     //creating artist of this product
     if (artist && artist.artistName !== "") {
-      const newArtist = await createArtistService({product: newProductId, artist});
+      const newArtist = await createArtistService({product: newProductId, ...artist});
       newProductData = newProduct[0];
       //setting artist to product
       newProductData.artist = newArtist?._id;
