@@ -43,6 +43,10 @@ const LuckyDrawSchema = new Schema(
         ref: "User",
       },
     ],
+    dueDate: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
