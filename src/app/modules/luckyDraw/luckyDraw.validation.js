@@ -16,6 +16,7 @@ export const createLuckyDrawZodSchema = z.object({
         .array(
           z.object({
             productID: z.string(),
+            title: z.string(),
             addedBy: z.string(),
           })
         )

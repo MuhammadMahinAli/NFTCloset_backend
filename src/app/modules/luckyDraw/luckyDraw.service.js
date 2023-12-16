@@ -114,3 +114,8 @@ export const getAllDrawService = async () => {
   const result = await LuckyDraw.find({});
   return result;
 };
+//----------get single luckyDraw
+export const getSingleDrawService = async (id) => {
+  const result = await LuckyDraw.findOne({_id:id});
+  return result;
+};
