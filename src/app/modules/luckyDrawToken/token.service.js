@@ -12,7 +12,7 @@ export const createLuckyDrawTokenService = async (data) => {
     return exist;
   } //
 
-  const token = data?.user?.slice(0, 5) + data?.luckyDraw?.slice(0, 4);
+  const token = data?.user?.slice(0, 5) + data?.luckyDraw?.slice(-4);
 
   const newToken = await LuckyDrawToken.create({token, ...data});
   if (!newToken) {
