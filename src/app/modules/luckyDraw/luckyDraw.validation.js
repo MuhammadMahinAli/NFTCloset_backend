@@ -9,10 +9,14 @@ export const createLuckyDrawZodSchema = z.object({
       title: z.string({
         required_error: "Title is required",
       }),
+      dueDate: z.string({
+        required_error: "dueDate is required",
+      }),
       products: z
         .array(
           z.object({
             productID: z.string(),
+            title: z.string(),
             addedBy: z.string(),
           })
         )

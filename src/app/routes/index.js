@@ -15,6 +15,7 @@ import {OrderRoutes} from "../modules/order/order.routes.js";
 import {RecycleRoutes} from "../modules/recycle/recycle.routes.js";
 import {WishListRoutes} from "../modules/wishList/wishList.routes.js";
 import {MetaDataRoutes} from "../modules/metadata/metadata.routes.js";
+import {LuckyDrawTokenRoutes} from "../modules/luckyDrawToken/token.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -24,6 +25,7 @@ const moduleRoutes = [
   {path: "/version", route: VersionRoutes},
   {path: "/collection", route: CollectionRoutes},
   {path: "/luckyDraw", route: LuckyDrawRoutes},
+  {path: "/luckyDrawToken", route: LuckyDrawTokenRoutes},
   {path: "/auction", route: AuctionRoutes},
   {path: "/cart", route: CartRoutes},
   {path: "/drop", route: DropRoutes},
