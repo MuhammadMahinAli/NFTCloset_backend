@@ -1,8 +1,22 @@
 import dotenv from "dotenv";
 import path from "path";
 
-dotenv.config({path: path.join(process.cwd(), ".env")});
-const {NODE_ENV, PORT, DATABASE_URL, DEFAULT_USER_PASS, BCRYPT_SALT_ROUNDS, JWT_SECRET, JWT_REFRESH_SECRET, JWT_EXPIRES_IN, JWT_REFRESH_EXPIRES_IN, COM_EMAIL, COM_PASS, CROSSMINT_PROJECT_ID, CROSSMINT_CLIENT_SECRET} = process.env;
+dotenv.config({ path: path.join(process.cwd(), ".env") });
+const {
+  NODE_ENV,
+  PORT,
+  DATABASE_URL,
+  DEFAULT_USER_PASS,
+  BCRYPT_SALT_ROUNDS,
+  JWT_SECRET,
+  JWT_REFRESH_SECRET,
+  JWT_EXPIRES_IN,
+  JWT_REFRESH_EXPIRES_IN,
+  COM_EMAIL,
+  COM_PASS,
+  CROSSMINT_PROJECT_ID,
+  CROSSMINT_CLIENT_SECRET,
+} = process.env;
 export default {
   env: NODE_ENV,
   port: PORT,

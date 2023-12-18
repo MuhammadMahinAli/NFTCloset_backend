@@ -3,7 +3,7 @@ import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
 import {addBidderToAuctionService, createAuctionService, deleteAuctionService} from "./auction.service.js";
 
-//-------create a auction
+// *-------create a auction
 export const createAuction = catchAsync(async (req, res, next) => {
   const data = req.body;
   const auction = await createAuctionService(data);
