@@ -1,4 +1,4 @@
-import {createUserService, deleteUserService, getAllUserService, getSingleUserService, updateUserService} from "./user.service.js";
+import {createUserService, deleteUserService, getAllUserService,getSingleUserServiceByRole, getSingleUserService, updateUserService} from "./user.service.js";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
 import httpStatus from "http-status";
@@ -31,6 +31,19 @@ export const getSingleUser = catchAsync(async (req, res) => {
   const email = req.params.email;
 
   const user = await getSingleUserService(email);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User retrieved successfully!",
+    data: user,
+  });
+});
+//------get  user by role
+export const getSingleUserByRole = catchAsync(async (req, res) => {
+  const role = req.params.role;
+
+  const user = await getSingleUserServiceByRole(role);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
