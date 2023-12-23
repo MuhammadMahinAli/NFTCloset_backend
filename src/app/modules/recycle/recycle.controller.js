@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {addProductToRecycleService, createRecycleService, deleteProductFromRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService, updateRecycleStatusService} from "./recycle.service.js";
+import {createRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService, updateRecycleStatusService} from "./recycle.service.js";
 
 //-------create recycle
 export const createRecycle = catchAsync(async (req, res, next) => {
