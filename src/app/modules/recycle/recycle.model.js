@@ -7,22 +7,23 @@ const RecycleSchema = new Schema(
       required: true,
       ref: "User",
     },
-
-    products: [
-      {
-        type: {
-          productID: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: "Product",
-          },
-          addedAt: {
-            type: Date,
-            default: new Date(Date.now()),
-          },
-        },
-      },
-    ],
+    productID: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Product",
+    },
+    addedAt: {
+      type: String,
+      default: new Date(Date.now()),
+    },
+    recyclePrice: {
+      type: Number,
+    },
+    status: {
+      type: String,
+      default: "pending",
+      enum: ["pending", "processing", "done"],
+    },
   },
   {
     timestamps: true,

@@ -5,76 +5,52 @@ import {Product} from "../product/product.model.js";
 import mongoose from "mongoose";
 
 //-----create a recycle by adding product
-export const addProductToRecycleService = async (payload) => {
-  const recycle = await Recycle.findOne({requestedBy: payload?.requestedBy});
-  let results = null;
-  if (recycle) {
-    results = await Recycle.findOneAndUpdate(
-      {requestedBy: payload?.requestedBy},
-      {$push: {products: {productID: payload?.product}}},
-      {
-        new: true,
-      }
-    );
-  } else {
-    const data = {requestedBy: payload?.requestedBy, products: [{productID: payload?.product}]};
-    results = await Recycle.create(data);
+export const createRecycleService = async (payload) => {
+  const exist = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID});
+  if (exist) {
+    throw new ApiError(httpStatus.CONFLICT, "This product is already requested");
   }
+  const results = await Recycle.create(data);
   if (!results) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Recycle request can't be done");
-  } else {
-    const product = await Product.findOne({_id: payload.product});
-    product.requestRecycle = true;
-    await product.save();
   }
-  return results;
-};
-
-//-----delete product from recycle
-export const deleteProductFromRecycleService = async (payload) => {
-  const recycle = await Recycle.findOne({requestedBy: payload?.requestedBy});
-  if (!recycle) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Recycle doesn't found");
-  }
-  const results = await Recycle.findOneAndUpdate(
-    {requestedBy: payload?.requestedBy},
-    {$pull: {products: {productID: payload?.product}}},
-    {
-      new: true,
-    }
-  );
-  if (!results) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Product couldn't be delete from Recycle");
-  } else {
-    const product = await Product.findOne({_id: payload.product});
-    product.requestRecycle = false;
-    await product.save();
-  }
+  const product = await Product.findOne({_id: payload?.productID});
+  product.requestRecycle = true;
+  await product.save();
   return results;
 };
 
 //----------delete recycle
-export const deleteRecycleService = async (id) => {
-  const result = await Recycle.findByIdAndDelete({requestedBy: id});
+export const deleteRecycleService = async (payload) => {
+  const result = await Recycle.findOneAndDelete({requestedBy: payload.requestedBy, productID: payload.productID});
   return result;
 };
 //----------get all recycle
 export const getAllRecycleService = async () => {
   const recycles = await Recycle.find({}).populate({
-    path: "products",
-    populate: {
-      path: "productID",
-    },
+    path: "productID",
   });
   return recycles;
 };
 //----------get single recycle
-export const getSingleRecycleService = async (id) => {
-  const recycle = await Recycle.findOne({requestedBy: id}).populate({
-    path: "products",
-    populate: {
-      path: "productID",
-    },
+export const getSingleRecycleService = async (payload) => {
+  const recycle = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID}).populate({
+    path: "productID",
   });
   return recycle;
+};
+//update status
+export const updateRecycleStatusService = async (payload) => {
+  const exist = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID});
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Recycle request doesn't found");
+  }
+  exist.status = payload.status;
+  await exist.save();
+  if (payload.status === "done") {
+    const product = await Product.findOne({_id: payload?.productID});
+    product.requestRecycle = false;
+    await product.save();
+  }
+  return exist;
 };

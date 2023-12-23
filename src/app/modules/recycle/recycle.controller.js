@@ -1,30 +1,24 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {addProductToRecycleService, deleteProductFromRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService} from "./recycle.service.js";
+import {addProductToRecycleService, createRecycleService, deleteProductFromRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService, updateRecycleStatusService} from "./recycle.service.js";
 
-//-------add or delete product to recycle
-export const addOrDeleteProductToRecycle = catchAsync(async (req, res, next) => {
+//-------create recycle
+export const createRecycle = catchAsync(async (req, res, next) => {
   const data = req?.body;
-  let recycle = null;
-  if (data?.add) {
-    recycle = await addProductToRecycleService(data);
-  } else {
-    recycle = await deleteProductFromRecycleService(data);
-  }
+  const recycle = await createRecycleService(data);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "products of recycle updated successfully!",
+    message: "recycle created successfully!",
     data: recycle,
   });
 });
 
 //-------delete recycle
 export const deleteRecycle = catchAsync(async (req, res, next) => {
-  const id = req?.params?.id;
-  const recycle = await deleteRecycleService(id);
+  const recycle = await deleteRecycleService(req?.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -35,8 +29,8 @@ export const deleteRecycle = catchAsync(async (req, res, next) => {
 });
 //-------get single recycle
 export const getSingleRecycle = catchAsync(async (req, res, next) => {
-  const id = req?.params?.id;
-  const recycle = await getSingleRecycleService(id);
+  const {requestedBy, productID} = req?.query;
+  const recycle = await getSingleRecycleService({requestedBy, productID});
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -53,6 +47,17 @@ export const getAllRecycle = catchAsync(async (req, res, next) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Recycles retrived successfully!",
+    data: recycles,
+  });
+});
+//update status
+export const updateRecycleStatus = catchAsync(async (req, res, next) => {
+  const recycles = await updateRecycleStatusService(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Recycles updated successfully!",
     data: recycles,
   });
 });
