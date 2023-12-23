@@ -27,10 +27,11 @@ export const createProductService = async (body) => {
     await addProductToCollections(payload?.collections, newProductId, session);
     //adding this product to the versions
     await addProductToDifferentVersions(newProductId, bodyVersions, session);
+    newProductData = newProduct[0];
     //creating artist of this product
-    if (artist && artist.artistName !== "") {
+    if (artist && artist.name !== "") {
       const newArtist = await createArtistService({product: newProductId, ...artist});
-      newProductData = newProduct[0];
+      // newProductData = newProduct[0];
       //setting artist to product
       newProductData.artist = newArtist?._id;
       await newProductData.save({session});
