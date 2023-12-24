@@ -12,6 +12,10 @@ const RecycleSchema = new Schema(
       required: true,
       ref: "Product",
     },
+    productImg: {
+      type: String,
+      required: true,
+    },
     addedAt: {
       type: String,
       default: new Date(Date.now()),

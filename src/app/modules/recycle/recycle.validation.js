@@ -7,7 +7,10 @@ export const createRecycleZodSchema = z.object({
         required_error: "requestedBy is required",
       }),
       productID: z.string({
-        required_error: "product is required",
+        required_error: "productID is required",
+      }),
+      productImg: z.string({
+        required_error: "productImg is required",
       }),
 
       recyclePrice: z.number().optional(),

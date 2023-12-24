@@ -10,7 +10,7 @@ export const createRecycleService = async (payload) => {
   if (exist) {
     throw new ApiError(httpStatus.CONFLICT, "This product is already requested");
   }
-  const results = await Recycle.create(data);
+  const results = await Recycle.create(payload);
   if (!results) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Recycle request can't be done");
   }
