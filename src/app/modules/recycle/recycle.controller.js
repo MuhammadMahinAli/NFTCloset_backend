@@ -18,7 +18,9 @@ export const createRecycle = catchAsync(async (req, res, next) => {
 
 //-------delete recycle
 export const deleteRecycle = catchAsync(async (req, res, next) => {
-  const recycle = await deleteRecycleService(req?.body);
+  const {requestedBy, productID} = req?.query;
+
+  const recycle = await deleteRecycleService({requestedBy, productID});
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
