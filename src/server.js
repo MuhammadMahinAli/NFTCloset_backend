@@ -19,7 +19,7 @@ export const db = async () => {
     server = app.listen(port, () => {
       console.log(` App listening on port ${port}`);
       //for deleting old products after 30 days
-      recycleAutomation();
+      // recycleAutomation();
     });
   } catch (err) {
     console.log("Failed to connect database", err);

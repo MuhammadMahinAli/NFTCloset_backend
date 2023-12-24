@@ -8,7 +8,9 @@ import mongoose from "mongoose";
 export const createRecycleService = async (payload) => {
   const exist = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID});
   if (exist) {
-    throw new ApiError(httpStatus.CONFLICT, "This product is already requested");
+    exist.totalRequested++;
+    exist.save();
+    return exist;
   }
   const results = await Recycle.create(payload);
   if (!results) {

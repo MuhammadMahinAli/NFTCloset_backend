@@ -23,6 +23,10 @@ const RecycleSchema = new Schema(
     recyclePrice: {
       type: Number,
     },
+    totalRequested: {
+      type:Number,
+      default:0
+    },
     status: {
       type: String,
       default: "pending",
