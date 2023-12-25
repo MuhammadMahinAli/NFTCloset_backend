@@ -9,7 +9,7 @@ router.post("/", validateRequest(createRecycleZodSchema), createRecycle);
 // router.post("/deleteProduct", validateRequest(addORDeleteProductToRecycleZodSchema), addOrDeleteProductToRecycle);
 router.get("/getAll", getAllRecycle);
 router.get("/getsingle/:id", getSingleRecycle);
-router.delete("/", deleteRecycle);
+router.post("/deleteRecycle", deleteRecycle);
 router.post("/updateStatus", updateRecycleStatus);
 //
 export const RecycleRoutes = router;

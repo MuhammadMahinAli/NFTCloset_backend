@@ -24,7 +24,8 @@ export const createRecycleService = async (payload) => {
 
 //----------delete recycle
 export const deleteRecycleService = async (payload) => {
-  const result = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID});
+  const result = await Recycle.findOneAndDelete({requestedBy: payload.requestedBy, productID: payload.productID});
+  console.log(payload);
   if (result) {
     const product = await Product.findOne({_id: payload?.productID});
     product.requestRecycle = false;
