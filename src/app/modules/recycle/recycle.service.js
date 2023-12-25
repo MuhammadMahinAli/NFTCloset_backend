@@ -2,7 +2,6 @@ import httpStatus from "http-status";
 import {ApiError} from "../../../handleError/apiError.js";
 import {Recycle} from "./recycle.model.js";
 import {Product} from "../product/product.model.js";
-import mongoose from "mongoose";
 
 //-----create a recycle by adding product
 export const createRecycleService = async (payload) => {
@@ -25,7 +24,7 @@ export const createRecycleService = async (payload) => {
 //----------delete recycle
 export const deleteRecycleService = async (payload) => {
   const result = await Recycle.findOneAndDelete({requestedBy: payload.requestedBy, productID: payload.productID});
-  console.log(payload);
+
   if (result) {
     const product = await Product.findOne({_id: payload?.productID});
     product.requestRecycle = false;
@@ -56,11 +55,24 @@ export const updateRecycleStatusService = async (payload) => {
     throw new ApiError(httpStatus.NOT_FOUND, "Recycle request doesn't found");
   }
   exist.status = payload.status;
-  await exist.save();
+
   if (payload.status === "done") {
+    exist.reprintProductImg = payload?.image;
+    exist.reprintPrice = payload?.price;
     const product = await Product.findOne({_id: payload?.productID});
     product.requestRecycle = false;
     await product.save();
   }
+  await exist.save();
+  return exist;
+};
+
+export const reprintProductService = async (payload) => {
+  const exist = await Recycle.findOne({requestedBy: payload.requestedBy, productID: payload.productID});
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Recycle request doesn't found");
+  }
+  exist.totalReprinted++;
+  await exist.save();
   return exist;
 };

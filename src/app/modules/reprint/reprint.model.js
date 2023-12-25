@@ -28,6 +28,5 @@ const ReprintSchema = new Schema(
     timestamps: true,
   }
 );
-// RecycleSchema.products.index({expireAt: 1}, {expireAfterSeconds: 20});
-//create Recycle model
+//create Reprint model
 export const Reprint = model("Reprint", ReprintSchema);

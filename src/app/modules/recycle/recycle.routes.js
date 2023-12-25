@@ -1,5 +1,5 @@
 import express from "express";
-import {createRecycle, deleteRecycle, getAllRecycle, getSingleRecycle, updateRecycleStatus} from "./recycle.controller.js";
+import {createRecycle, deleteRecycle, getAllRecycle, getSingleRecycle, reprintProduct, updateRecycleStatus} from "./recycle.controller.js";
 import {validateRequest} from "../../middlewars/validateRequest.js";
 import {createRecycleZodSchema} from "./recycle.validation.js";
 
@@ -11,5 +11,6 @@ router.get("/getAll", getAllRecycle);
 router.get("/getsingle/:id", getSingleRecycle);
 router.post("/deleteRecycle", deleteRecycle);
 router.post("/updateStatus", updateRecycleStatus);
+router.post("/reprint", reprintProduct);
 //
 export const RecycleRoutes = router;

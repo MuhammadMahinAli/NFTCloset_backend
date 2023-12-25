@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {createRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService, updateRecycleStatusService} from "./recycle.service.js";
+import {createRecycleService, deleteRecycleService, getAllRecycleService, getSingleRecycleService, reprintProductService, updateRecycleStatusService} from "./recycle.service.js";
 
 //-------create recycle
 export const createRecycle = catchAsync(async (req, res, next) => {
@@ -59,5 +59,16 @@ export const updateRecycleStatus = catchAsync(async (req, res, next) => {
     success: true,
     message: "Recycles updated successfully!",
     data: recycles,
+  });
+});
+//reprint product
+export const reprintProduct = catchAsync(async (req, res, next) => {
+  const result = await reprintProductService(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "product reprinted successfully!",
+    data: result,
   });
 });

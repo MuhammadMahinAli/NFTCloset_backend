@@ -24,13 +24,23 @@ const RecycleSchema = new Schema(
       type: Number,
     },
     totalRequested: {
-      type:Number,
-      default:0
+      type: Number,
+      default: 0,
     },
     status: {
       type: String,
       default: "pending",
       enum: ["pending", "processing", "done"],
+    },
+    reprintProductImg: {
+      type: String,
+    },
+    totalReprinted: {
+      type: Number,
+      default: 0,
+    },
+    reprintPrice: {
+      type: Number,
     },
   },
   {
