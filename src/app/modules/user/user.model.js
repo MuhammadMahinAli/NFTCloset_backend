@@ -54,6 +54,9 @@ const UserSchema = new Schema(
       required: true,
       enum: ["Admin", "Seller", "Buyer", "Designer"],
     },
+    profileImg: {
+      type: String,
+    },
   },
   {
     timestamps: true,
