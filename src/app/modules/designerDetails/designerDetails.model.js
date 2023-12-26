@@ -9,9 +9,11 @@ const DesignerDetailsSchema = new Schema(
     },
     displayName: {
       type: String,
+      required: true,
     },
     userName: {
       type: String,
+      required: true,
     },
     bannerImg: {
       type: String,

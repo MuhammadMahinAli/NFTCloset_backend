@@ -16,6 +16,9 @@ import {RecycleRoutes} from "../modules/recycle/recycle.routes.js";
 import {WishListRoutes} from "../modules/wishList/wishList.routes.js";
 import {MetaDataRoutes} from "../modules/metadata/metadata.routes.js";
 import {LuckyDrawTokenRoutes} from "../modules/luckyDrawToken/token.routes.js";
+import {DesignerDetailsRoutes} from "../modules/designerDetails/designerDetails.routes.js";
+import {DesignerCertificateRoutes} from "../modules/designerCertificate/designerCertificate.routes.js";
+import {DesignerEducationRoutes} from "../modules/designerEducation/designerEducation.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -36,6 +39,9 @@ const moduleRoutes = [
   {path: "/recycle", route: RecycleRoutes},
   {path: "/wishlist", route: WishListRoutes},
   {path: "/metadata", route: MetaDataRoutes},
+  {path: "/designerDetails", route: DesignerDetailsRoutes},
+  {path: "/designerEducations", route: DesignerEducationRoutes},
+  {path: "/designerCertificates", route: DesignerCertificateRoutes},
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
 
