@@ -15,6 +15,8 @@ export const createProductZodSchema = z.object({
           required_error: "SKU is required",
         }),
         quantity: z.number().optional(),
+        reprintPrice: z.number().optional(),
+        recyclePrice: z.number().optional(),
         collections: z
           .array(
             z.object({

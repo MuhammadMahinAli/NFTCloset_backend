@@ -106,6 +106,12 @@ const ProductSchema = new Schema(
       type: Number,
       default: 0,
     },
+    recyclePrice: {
+      type: Number,
+    },
+    reprintPrice: {
+      type: Number,
+    },
     image: {type: String},
     // volume: {
     //   type: String,
