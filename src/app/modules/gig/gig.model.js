@@ -1,53 +1,58 @@
 import {Schema, model} from "mongoose";
 
-const DesignerDetailsSchema = new Schema(
+const GigSchema = new Schema(
   {
     designer: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
-    displayName: {
+    title: {
       type: String,
       required: true,
-    },
-    userName: {
-      type: String,
-      required: true,
-    },
-    bannerImg: {
-      type: String,
     },
     description: {
       type: String,
+      required: true,
     },
-    profession: {
+    category: {
       type: String,
+      required: true,
     },
-    skills: [
-      {
-        type: String,
-      },
-    ],
-    hobby: [
-      {
-        type: String,
-      },
-    ],
-    languages: [
-      {
-        type: String,
-      },
-    ],
-    level: {
+    subCategory: {
       type: String,
-      enum: ["1", "2", "3", "4"],
+      required: true,
     },
+
+    tags: [
+      {
+        type: String,
+      },
+    ],
+
+    serviceType: {
+      type: String,
+      required: true,
+    },
+    video: {
+      type: String,
+      required: true,
+    },
+    documents: [
+      {
+        type: String,
+      },
+    ],
+    images: [
+      {
+        type: String,
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-//create DesignerDetails model
-export const DesignerDetails = model("DesignerDetails", DesignerDetailsSchema);
+//create Gig model
+export const Gig = model("Gig", GigSchema);

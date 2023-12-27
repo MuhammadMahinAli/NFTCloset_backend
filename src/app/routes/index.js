@@ -14,7 +14,6 @@ import {OfferRoutes} from "../modules/offer/offer.routes.js";
 import {OrderRoutes} from "../modules/order/order.routes.js";
 import {RecycleRoutes} from "../modules/recycle/recycle.routes.js";
 import {WishListRoutes} from "../modules/wishList/wishList.routes.js";
-import {MetaDataRoutes} from "../modules/metadata/metadata.routes.js";
 import {LuckyDrawTokenRoutes} from "../modules/luckyDrawToken/token.routes.js";
 import {DesignerDetailsRoutes} from "../modules/designerDetails/designerDetails.routes.js";
 import {DesignerCertificateRoutes} from "../modules/designerCertificate/designerCertificate.routes.js";
@@ -38,7 +37,6 @@ const moduleRoutes = [
   {path: "/order", route: OrderRoutes},
   {path: "/recycle", route: RecycleRoutes},
   {path: "/wishlist", route: WishListRoutes},
-  {path: "/metadata", route: MetaDataRoutes},
   {path: "/designerDetails", route: DesignerDetailsRoutes},
   {path: "/designerEducations", route: DesignerEducationRoutes},
   {path: "/designerCertificates", route: DesignerCertificateRoutes},
