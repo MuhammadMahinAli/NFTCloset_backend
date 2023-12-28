@@ -17,11 +17,7 @@ const GigSchema = new Schema(
     },
     category: {
       type: String,
-      required: true,
-    },
-    subCategory: {
-      type: String,
-      required: true,
+      default: "Fashion",
     },
 
     tags: [
@@ -33,6 +29,12 @@ const GigSchema = new Schema(
     serviceType: {
       type: String,
       required: true,
+      enum: ["Technical Drawing and Tech Pack", "Fashion Illustration", "3D Garment Design", "Pattern Making", "Full Design Process"],
+    },
+    service: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "TeckPack" || "FullDesign" || "Fashion" || "Garment" || "Pattern",
     },
     video: {
       type: String,

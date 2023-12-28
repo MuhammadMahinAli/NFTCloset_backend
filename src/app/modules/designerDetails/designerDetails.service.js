@@ -9,7 +9,7 @@ import {DesignerCertificate} from "../designerCertificate/designerCertificate.mo
 
 export const addDesignerDetailsService = async (payload) => {
   let data = null;
-  const {educations, certificates, ...others} = payload;
+  const {educations, certificates, portfolios, ...others} = payload;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -22,7 +22,8 @@ export const addDesignerDetailsService = async (payload) => {
     await Promise.all(educations?.map(async (education) => await addDesignerEducationService({designer: data?._id, ...education, session})));
     //creating certificate
     await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
-    //
+    //creating portfolios
+    await Promise.all(portfolios?.map(async (portfolio) => await addDesignerCertificateService({designer: data?._id, ...portfolio, session})));
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {
