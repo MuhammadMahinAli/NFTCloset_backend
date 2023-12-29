@@ -17,8 +17,8 @@ export const getDesignerAllCertificates = catchAsync(async (req, res, next) => {
 });
 //------delete designer certificate
 export const deleteDesignerCertificate = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const result = await deleteDesignerCertificateService(id);
+  const {certificate, designer} = req.query;
+  const result = await deleteDesignerCertificateService({certificate, designer});
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

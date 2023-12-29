@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {DesignerCertificate} from "./designerCertificate.model.js";
 import {ApiError} from "../../../handleError/apiError.js";
-
+//add designer certificate
 export const addDesignerCertificateService = async (payload) => {
   const {session, ...data} = payload;
   const result = await DesignerCertificate.create(payload, {session});
@@ -11,12 +11,12 @@ export const addDesignerCertificateService = async (payload) => {
 
   return result[0];
 };
-
+//get designer all certificates
 export const getDesignerAllCertificateService = async (designer) => {
   const certificates = await DesignerCertificate.find({designer});
   return certificates;
 };
-
+//delete certificate
 export const deleteDesignerCertificateService = async ({certificate, designer}) => {
   const result = await DesignerCertificate.findOneAndDelete({_id: certificate, designer});
   if (!result) {
@@ -25,7 +25,7 @@ export const deleteDesignerCertificateService = async ({certificate, designer}) 
 
   return result;
 };
-
+//update designer certificate
 export const updateDesignerCrtificateService = async (payload) => {
   const {designer, session, ...certificate} = payload;
   const exist = await DesignerCertificate.findOne({designer, _id: certificate.id});

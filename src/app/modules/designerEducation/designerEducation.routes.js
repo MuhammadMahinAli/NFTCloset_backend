@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/designer/:id", getDesignerEducations);
 
-router.delete("/:id", deleteDesignerEducation);
+router.delete("/", deleteDesignerEducation);
 //
 export const DesignerEducationRoutes = router;

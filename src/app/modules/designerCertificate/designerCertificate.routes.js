@@ -3,10 +3,7 @@ import {deleteDesignerCertificate, getDesignerAllCertificates} from "./designerC
 
 const router = express.Router();
 
-// router.post("/", createDesignerDetails);
 router.get("/designer/:id", getDesignerAllCertificates);
-// router.get("/getuserby/:role", getSingleUserByRole);
-// router.patch("/:id", validateRequest(updateUserZodSchema), updateUser);
-router.delete("/:id", deleteDesignerCertificate);
+router.delete("/", deleteDesignerCertificate);
 //
 export const DesignerCertificateRoutes = router;
