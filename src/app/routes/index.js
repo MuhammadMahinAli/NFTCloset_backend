@@ -18,6 +18,8 @@ import {LuckyDrawTokenRoutes} from "../modules/luckyDrawToken/token.routes.js";
 import {DesignerDetailsRoutes} from "../modules/designerDetails/designerDetails.routes.js";
 import {DesignerCertificateRoutes} from "../modules/designerCertificate/designerCertificate.routes.js";
 import {DesignerEducationRoutes} from "../modules/designerEducation/designerEducation.routes.js";
+import {DesignerEarningRoutes} from "../modules/designerEarning/designerEarning.routes.js";
+import {DesignerPortfolioRoutes} from "../modules/designerPortfolio/designerPortfolio.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -40,6 +42,8 @@ const moduleRoutes = [
   {path: "/designerDetails", route: DesignerDetailsRoutes},
   {path: "/designerEducations", route: DesignerEducationRoutes},
   {path: "/designerCertificates", route: DesignerCertificateRoutes},
+  {path: "/designerEarnings", route: DesignerEarningRoutes},
+  {path: "/designerPortfolio", route: DesignerPortfolioRoutes},
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
 
