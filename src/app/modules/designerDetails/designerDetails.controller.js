@@ -1,7 +1,7 @@
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
 import httpStatus from "http-status";
-import {addDesignerDetailsService, deleteDesignerDetailsService, getDesignerDetailsService} from "./designerDetails.service.js";
+import {addDesignerDetailsService, deleteDesignerDetailsService, getDesignerDetailsService, updateDesignerDetailsService} from "./designerDetails.service.js";
 
 //------create designer details
 export const createDesignerDetails = catchAsync(async (req, res, next) => {
@@ -36,6 +36,17 @@ export const deleteDesignerDetails = catchAsync(async (req, res, next) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Details deleted successfully!",
+    data: result,
+  });
+});
+//------update designer details
+export const updateDesignerDetails = catchAsync(async (req, res, next) => {
+  const result = await updateDesignerDetailsService(req?.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Details updated successfully!",
     data: result,
   });
 });

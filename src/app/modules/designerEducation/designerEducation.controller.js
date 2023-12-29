@@ -15,10 +15,11 @@ export const getDesignerEducations = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
+
 //------delete designer educ
 export const deleteDesignerEducation = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const result = await deleteDesignerEducationService(id);
+  const {education, designer} = req.query;
+  const result = await deleteDesignerEducationService(education, designer);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
