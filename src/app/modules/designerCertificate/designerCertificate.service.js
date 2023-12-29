@@ -25,3 +25,14 @@ export const deleteDesignerCertificateService = async ({certificate, designer}) 
 
   return result;
 };
+
+export const updateDesignerCrtificateService = async (payload) => {
+  const {designer, session, ...certificate} = payload;
+  const exist = await DesignerCertificate.findOne({designer, _id: certificate.id});
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Certificate doesn't found!");
+  }
+  const result = await DesignerCertificate.findOneAndUpdate({designer, _id: certificate.id}, certificate, {new: true}).session(session);
+
+  return result;
+};

@@ -25,3 +25,14 @@ export const deleteDesignerEducationService = async ({education, designer}) => {
 
   return result;
 };
+
+export const updateDesignerEducationService = async (payload) => {
+  const {designer, session, ...education} = payload;
+  const exist = await DesignerEducation.findOne({designer, _id: education.id});
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "education doesn't found!");
+  }
+  const result = await DesignerEducation.findOneAndUpdate({designer, _id: education.id}, education, {new: true}).session(session);
+
+  return result;
+};
