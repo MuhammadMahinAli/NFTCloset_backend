@@ -12,7 +12,7 @@ import {updateDesignerPortfolioService} from "../designerPortfolio/designerPortf
 //add designer details
 export const addDesignerDetailsService = async (payload) => {
   let data = null;
-  const {educations, certificates, portfolios, ...others} = payload;
+  const {educations, certificates, ...others} = payload;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -29,10 +29,7 @@ export const addDesignerDetailsService = async (payload) => {
     if (certificates) {
       await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
     }
-    //creating portfolios
-    if (portfolios) {
-      await Promise.all(portfolios?.map(async (portfolio) => await addDesignerCertificateService({designer: data?._id, ...portfolio, session})));
-    }
+
     //creating earnings
     if (earnings) {
       await Promise.all(earnings?.map(async (earning) => await addDesignerEarningService({designer: data?._id, ...earning, session})));

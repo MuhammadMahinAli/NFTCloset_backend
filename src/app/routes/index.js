@@ -20,6 +20,10 @@ import {DesignerCertificateRoutes} from "../modules/designerCertificate/designer
 import {DesignerEducationRoutes} from "../modules/designerEducation/designerEducation.routes.js";
 import {DesignerEarningRoutes} from "../modules/designerEarning/designerEarning.routes.js";
 import {DesignerPortfolioRoutes} from "../modules/designerPortfolio/designerPortfolio.routes.js";
+import {GigRoutes} from "../modules/gig/gig.routes.js";
+import {GigReviewRoutes} from "../modules/gigReview/gigReview.routes.js";
+import {GigPackagesRoutes} from "../modules/gigPackage/gigPackage.routes.js";
+import {GigFaqRoutes} from "../modules/gigFaq/gigFaq.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -44,6 +48,11 @@ const moduleRoutes = [
   {path: "/designerCertificates", route: DesignerCertificateRoutes},
   {path: "/designerEarnings", route: DesignerEarningRoutes},
   {path: "/designerPortfolio", route: DesignerPortfolioRoutes},
+  {path: "/gigs", route: GigRoutes},
+  {path: "/gigReviews", route: GigReviewRoutes},
+  {path: "/gigPackages", route: GigPackagesRoutes},
+  {path: "/gigFaqs", route: GigFaqRoutes},
+  // {path: "/gigs", route: GigRoutes},
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
 

@@ -7,7 +7,7 @@ const DesignerCertificateSchema = new Schema(
       required: true,
       ref: "User",
     },
-    certificateORaward: {
+    certificateOReward: {
       type: String,
       required: true,
     },
