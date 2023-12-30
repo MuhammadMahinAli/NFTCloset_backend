@@ -12,6 +12,16 @@ export const addGigFaqService = async (payload) => {
 
   return result[0];
 };
+//get all faqs
+export const getAllGigFaqsService = async (gig) => {
+  const faqs = await GigFaq.find({gig});
+  return packages;
+};
+//get single faq
+export const getSingleGigFaqService = async (gig, id) => {
+  const faq = await GigFaq.findOne({gig, _id: id});
+  return faq;
+};
 //update gig faq
 export const updateGigFaqService = async (payload) => {
   const {session, ...data} = payload;
