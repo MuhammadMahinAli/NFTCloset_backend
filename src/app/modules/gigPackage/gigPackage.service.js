@@ -12,6 +12,16 @@ export const addGigPackageService = async (payload) => {
 
   return result[0];
 };
+//get all packages
+export const getAllGigPackageService = async (gig) => {
+  const packages = await GigPackage.find({gig});
+  return packages;
+};
+//get single package
+export const getSingleGigPackageService = async (gig, packageName) => {
+  const pack = await GigPackage.findOne({gig, packageName});
+  return pack;
+};
 //update gig package
 export const updateGigPackageService = async (payload) => {
   const {session, ...data} = payload;
