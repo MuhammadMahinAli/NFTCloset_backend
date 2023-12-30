@@ -12,3 +12,23 @@ export const addGigPackageService = async (payload) => {
 
   return result[0];
 };
+//update gig package
+export const updateGigPackageService = async (payload) => {
+  const {session, ...data} = payload;
+  const result = await GigPackage.findOneAndUpdate({gig, _id: data?.id}, data, {new: true}).session(session);
+  if (!result) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to update gig package");
+  }
+
+  return result;
+};
+
+//delete gig package
+export const deleteGigPackageService = async (gig, id, session) => {
+  const result = await GigPackage.findOneAndDelete({gig, _id: id}).session(session);
+  if (!result) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to delete gig package");
+  }
+
+  return result;
+};
