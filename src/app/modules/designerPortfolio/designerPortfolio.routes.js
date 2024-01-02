@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/", createDesignerPortfolio);
 router.get("/getsingle/:id", getDesignerSinglePortfolio);
-router.get("/getAll", getDesignerAllPortfolios);
+router.get("/getAll/:id", getDesignerAllPortfolios);
 router.delete("/:id", deleteDesignerPortfolio);
 router.post("/updatePortfolio", updateDesignerPortfolio);
 //
