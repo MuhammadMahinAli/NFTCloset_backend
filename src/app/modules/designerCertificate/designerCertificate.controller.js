@@ -1,8 +1,17 @@
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
 import httpStatus from "http-status";
-import {deleteDesignerCertificateService, getDesignerAllCertificateService} from "./designerCertificate.service.js";
+import {addDesignerCertificateService, deleteDesignerCertificateService, getDesignerAllCertificateService} from "./designerCertificate.service.js";
+export const addDesignerCertificate = catchAsync(async (req, res, next) => {
+  const result = await addDesignerCertificateService(req.body);
 
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Certificates added successfully!",
+    data: result,
+  });
+});
 //------get designer all certi
 export const getDesignerAllCertificates = catchAsync(async (req, res, next) => {
   const id = req.params.id;
@@ -17,7 +26,7 @@ export const getDesignerAllCertificates = catchAsync(async (req, res, next) => {
 });
 //------delete designer certificate
 export const deleteDesignerCertificate = catchAsync(async (req, res, next) => {
-  const {certificate, designer} = req.query;
+  const {certificate, designer} = req.body;
   const result = await deleteDesignerCertificateService({certificate, designer});
 
   sendResponse(res, {

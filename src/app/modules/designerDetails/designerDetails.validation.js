@@ -18,6 +18,7 @@ export const addORUpdateDesignerDetailsZodSchema = z.object({
       educations: z
         .array(
           z.object({
+            id: z.string().optional(),
             country: z.string().optional(),
             institution: z.string().optional(),
             major: z.string().optional(),
@@ -29,6 +30,7 @@ export const addORUpdateDesignerDetailsZodSchema = z.object({
       certificates: z
         .array(
           z.object({
+            id: z.string().optional(),
             certificateOReward: z.string().optional(),
             certifiedFrom: z.string().optional(),
             year: z.string().optional(),

@@ -16,6 +16,7 @@ export const getDesignerEarning = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
+
 //------update designer earning
 export const updateDesignerEarning = catchAsync(async (req, res, next) => {
   const result = await updateDesignerEarningService(req?.body);

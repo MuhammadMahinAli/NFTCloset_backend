@@ -1,10 +1,10 @@
 import express from "express";
-import {deleteDesignerEducation, getDesignerEducations} from "./designerEducation.controller.js";
+import {addDesignerEducation, deleteDesignerEducation, getDesignerEducations} from "./designerEducation.controller.js";
 
 const router = express.Router();
-
+router.post("/", addDesignerEducation);
 router.get("/designer/:id", getDesignerEducations);
 
-router.delete("/", deleteDesignerEducation);
+router.post("/delete", deleteDesignerEducation);
 //
 export const DesignerEducationRoutes = router;

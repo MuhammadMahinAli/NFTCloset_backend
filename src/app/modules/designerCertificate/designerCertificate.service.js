@@ -3,13 +3,12 @@ import {DesignerCertificate} from "./designerCertificate.model.js";
 import {ApiError} from "../../../handleError/apiError.js";
 //add designer certificate
 export const addDesignerCertificateService = async (payload) => {
-  const {session, ...data} = payload;
-  const result = await DesignerCertificate.create([data], {session});
-  if (!result[0]) {
+  const result = await DesignerCertificate.create(payload);
+  if (!result) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create certificate");
   }
 
-  return result[0];
+  return result;
 };
 //get designer all certificates
 export const getDesignerAllCertificateService = async (designer) => {
@@ -27,12 +26,12 @@ export const deleteDesignerCertificateService = async ({certificate, designer}) 
 };
 //update designer certificate
 export const updateDesignerCrtificateService = async (payload) => {
-  const {designer, session, ...certificate} = payload;
+  const {designer, ...certificate} = payload;
   const exist = await DesignerCertificate.findOne({designer, _id: certificate.id});
   if (!exist) {
     throw new ApiError(httpStatus.NOT_FOUND, "Certificate doesn't found!");
   }
-  const result = await DesignerCertificate.findOneAndUpdate({designer, _id: certificate.id}, certificate, {new: true}).session(session);
+  const result = await DesignerCertificate.findOneAndUpdate({designer, _id: certificate.id}, certificate, {new: true});
 
   return result;
 };

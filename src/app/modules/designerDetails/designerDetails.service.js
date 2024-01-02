@@ -23,14 +23,14 @@ export const addDesignerDetailsService = async (payload) => {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create DesignerDetails");
     }
     data = result[0];
-    //creating eduction
-    if (educations) {
-      await Promise.all(educations?.map(async (education) => await addDesignerEducationService({designer: data?._id, ...education, session})));
-    }
-    //creating certificate
-    if (certificates) {
-      await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
-    }
+    // //creating eduction
+    // if (educations) {
+    //   await Promise.all(educations?.map(async (education) => await addDesignerEducationService({designer: data?._id, ...education, session})));
+    // }
+    // //creating certificate
+    // if (certificates) {
+    //   await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
+    // }
 
     await addDesignerEarningService({designer: data?._id}, session);
 
@@ -60,15 +60,15 @@ export const deleteDesignerDetailsService = async (designer) => {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to delete designer details");
     }
 
-    //deleting eduction
-    const educations = await DesignerEducation.find({designer});
-    await Promise.all(educations?.map(async (education) => await DesignerEducation.findOneAndDelete({designer, _id: education}).session(session)));
-    //deleting certificate
-    const certificates = await DesignerCertificate.find({designer});
-    await Promise.all(certificates?.map(async (certificate) => await DesignerCertificate.findOneAndDelete({designer, _id: certificate}).session(session)));
-    //deleting portfolios
-    const portfolios = await DesignerPortfolio.find({designer});
-    await Promise.all(portfolios?.map(async (portfolio) => await DesignerPortfolio.findOneAndDelete({designer, _id: portfolio}).session(session)));
+    // //deleting eduction
+    // const educations = await DesignerEducation.find({designer});
+    // await Promise.all(educations?.map(async (education) => await DesignerEducation.findOneAndDelete({designer, _id: education}).session(session)));
+    // //deleting certificate
+    // const certificates = await DesignerCertificate.find({designer});
+    // await Promise.all(certificates?.map(async (certificate) => await DesignerCertificate.findOneAndDelete({designer, _id: certificate}).session(session)));
+    // //deleting portfolios
+    // const portfolios = await DesignerPortfolio.find({designer});
+    // await Promise.all(portfolios?.map(async (portfolio) => await DesignerPortfolio.findOneAndDelete({designer, _id: portfolio}).session(session)));
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {

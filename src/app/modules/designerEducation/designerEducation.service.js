@@ -3,13 +3,12 @@ import {ApiError} from "../../../handleError/apiError.js";
 import {DesignerEducation} from "./designerEducation.model.js";
 //add education
 export const addDesignerEducationService = async (payload) => {
-  const {session, ...data} = payload;
-  const result = await DesignerEducation.create([data], {session});
+  const result = await DesignerEducation.create(payload);
   if (!result) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create education");
   }
 
-  return result[0];
+  return result;
 };
 //get all education
 export const getDesignerEducationsService = async (designer) => {
@@ -32,12 +31,12 @@ export const deleteDesignerEducationService = async (education, designer) => {
 };
 //update education
 export const updateDesignerEducationService = async (payload) => {
-  const {designer, session, ...education} = payload;
+  const {designer, ...education} = payload;
   const exist = await DesignerEducation.findOne({designer, _id: education.id});
   if (!exist) {
     throw new ApiError(httpStatus.NOT_FOUND, "education doesn't found!");
   }
-  const result = await DesignerEducation.findOneAndUpdate({designer, _id: education.id}, education, {new: true}).session(session);
+  const result = await DesignerEducation.findOneAndUpdate({designer, _id: education.id}, education, {new: true});
 
   return result;
 };
