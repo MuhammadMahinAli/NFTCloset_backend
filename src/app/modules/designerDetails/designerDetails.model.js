@@ -29,7 +29,7 @@ const DesignerDetailsSchema = new Schema(
         type: String,
       },
     ],
-    hobby: [
+    hobbies: [
       {
         type: String,
       },

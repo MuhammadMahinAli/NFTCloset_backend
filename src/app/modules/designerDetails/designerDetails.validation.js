@@ -1,57 +1,37 @@
 import {z} from "zod";
 
-export const addDesignerDetailsZodSchema = z.object({
+export const addORUpdateDesignerDetailsZodSchema = z.object({
   body: z
     .object({
       designer: z.string({
         required_error: "designer is required",
       }),
-      displayName: z.string({
-        required_error: "displayName is required",
-      }),
-      description: z.string({
-        required_error: "description is required",
-      }),
+      displayName: z.string().optional(),
+      description: z.string().optional(),
 
       bannerImg: z.string().optional(),
       profession: z.string().optional(),
       skills: z.array(z.string().optional()).optional(),
       languages: z.array(z.string().optional()).optional(),
-      hobby: z.array(z.string().optional()).optional(),
+      hobbies: z.array(z.string().optional()).optional(),
 
       educations: z
         .array(
           z.object({
-            country: z.string({
-              required_error: "country is required",
-            }),
-            institution: z.string({
-              required_error: "institution is required",
-            }),
-            major: z.string({
-              required_error: "major is required",
-            }),
-            year: z.string({
-              required_error: "year is required",
-            }),
-            title: z.string({
-              required_error: "title is required",
-            }),
+            country: z.string().optional(),
+            institution: z.string().optional(),
+            major: z.string().optional(),
+            year: z.string().optional(),
+            title: z.string().optional(),
           })
         )
         .optional(),
-      certifications: z
+      certificates: z
         .array(
           z.object({
-            certificateOReward: z.string({
-              required_error: "certificateOReward is required",
-            }),
-            certifiedFrom: z.string({
-              required_error: "certifiedFrom is required",
-            }),
-            year: z.string({
-              required_error: "year is required",
-            }),
+            certificateOReward: z.string().optional(),
+            certifiedFrom: z.string().optional(),
+            year: z.string().optional(),
           })
         )
         .optional(),

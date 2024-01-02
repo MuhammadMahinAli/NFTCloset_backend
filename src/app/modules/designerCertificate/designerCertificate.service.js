@@ -4,7 +4,7 @@ import {ApiError} from "../../../handleError/apiError.js";
 //add designer certificate
 export const addDesignerCertificateService = async (payload) => {
   const {session, ...data} = payload;
-  const result = await DesignerCertificate.create(payload, {session});
+  const result = await DesignerCertificate.create([data], {session});
   if (!result[0]) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create certificate");
   }

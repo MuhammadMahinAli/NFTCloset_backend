@@ -5,7 +5,7 @@ import {DesignerEarning} from "./designerEarning.model.js";
 //add designer earnings
 export const addDesignerEarningService = async (payload) => {
   const {session, ...data} = payload;
-  const result = await DesignerEarning.create(payload, {session});
+  const result = await DesignerEarning.create([data], {session});
   if (!result[0]) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create earning");
   }
@@ -25,9 +25,9 @@ export const updateDesignerEarningService = async (payload) => {
   if (!exist) {
     throw new ApiError(httpStatus.NOT_FOUND, "Earning not found");
   }
-  const result = await DesignerEarning.findOneAndUpdate({designer: payload?.designer},payload,{new:true});
-if (!result) {
-  throw new ApiError(httpStatus.BAD_REQUEST, "Failed to update earning");
-}
+  const result = await DesignerEarning.findOneAndUpdate({designer: payload?.designer}, payload, {new: true});
+  if (!result) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Failed to update earning");
+  }
   return result;
 };

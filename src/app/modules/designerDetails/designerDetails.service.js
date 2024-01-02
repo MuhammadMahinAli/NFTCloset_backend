@@ -14,9 +14,11 @@ export const addDesignerDetailsService = async (payload) => {
   let data = null;
   const {educations, certificates, ...others} = payload;
   const session = await mongoose.startSession();
+  const userName = others.displayName.split(" ")[0] + others.designer.slice(-3);
+  const detailsData = {userName, ...others};
   try {
     session.startTransaction();
-    const result = await DesignerDetails.create([others], {session});
+    const result = await DesignerDetails.create([detailsData], {session});
     if (!result) {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create DesignerDetails");
     }
@@ -30,10 +32,7 @@ export const addDesignerDetailsService = async (payload) => {
       await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
     }
 
-    //creating earnings
-    if (earnings) {
-      await Promise.all(earnings?.map(async (earning) => await addDesignerEarningService({designer: data?._id, ...earning, session})));
-    }
+    await addDesignerEarningService({designer: data?._id}, session);
 
     await session.commitTransaction();
     await session.endSession();
@@ -47,7 +46,7 @@ export const addDesignerDetailsService = async (payload) => {
 };
 
 export const getDesignerDetailsService = async (designer) => {
-  const details = await DesignerDetails.find({designer});
+  const details = await DesignerDetails.findOne({designer});
   return details;
 };
 //deleting details

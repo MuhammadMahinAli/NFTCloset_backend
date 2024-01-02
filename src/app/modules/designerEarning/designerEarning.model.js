@@ -9,17 +9,17 @@ const DesignerEarningSchema = new Schema(
     },
     availableBalance: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
     totalEarnings: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
     totalExpanse: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
   },

@@ -4,14 +4,20 @@ import httpStatus from "http-status";
 import {addDesignerDetailsService, deleteDesignerDetailsService, getDesignerDetailsService, updateDesignerDetailsService} from "./designerDetails.service.js";
 
 //------create designer details
-export const createDesignerDetails = catchAsync(async (req, res, next) => {
+export const createORUpdateDesignerDetails = catchAsync(async (req, res, next) => {
   const data = req.body;
-  const result = await addDesignerDetailsService(data);
+  let result = null;
+  const designer = await getDesignerDetailsService(data?.designer);
+  if (designer?._id) {
+    result = await updateDesignerDetailsService(data);
+  } else {
+    result = await addDesignerDetailsService(data);
+  }
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Details added successfully!",
+    message: `Details ${designer?._id ? "updated" : "added"} successfully!`,
     data: result,
   });
 });

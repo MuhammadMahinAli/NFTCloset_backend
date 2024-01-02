@@ -52,7 +52,7 @@ export const updateUserZodSchema = z.object({
       city: z.string().optional(),
       zipCode: z.string().optional(),
       role: z.enum([...roleEnums]).optional(),
-      productsOwnerShip: z.string().optional(),
+      profileImg: z.string().optional(),
     })
     .strict(),
 });
