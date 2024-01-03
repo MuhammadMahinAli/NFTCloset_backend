@@ -19,7 +19,6 @@ const GigSchema = new Schema(
       type: String,
       default: "Fashion",
     },
-
     tags: [
       {
         type: String,
