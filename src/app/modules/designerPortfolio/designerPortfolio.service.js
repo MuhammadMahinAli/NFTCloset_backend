@@ -13,11 +13,11 @@ export const addDesignerPortfolioService = async (payload) => {
 //update designer portfolio
 export const updateDesignerPortfolioService = async (payload) => {
   const {designer, ...portfolio} = payload;
-  const exist = await DesignerPortfolio.findOne({designer, _id: portfolio.id});
+  const exist = await DesignerPortfolio.findOne({designer, _id: portfolio._id});
   if (!exist) {
     throw new ApiError(httpStatus.NOT_FOUND, "portfolio doesn't found!");
   }
-  const result = await DesignerPortfolio.findOneAndUpdate({designer, _id: portfolio.id}, portfolio, {new: true});
+  const result = await DesignerPortfolio.findOneAndUpdate({designer, _id: portfolio._id}, portfolio, {new: true});
 
   return result;
 };
@@ -27,13 +27,14 @@ export const getDesignerAllPortfolioService = async (designer) => {
   return result;
 };
 //get single portfolio
-export const getSingleDesignerPortfolioService = async (designer, id) => {
-  const result = await DesignerPortfolio.find({designer, _id: id});
+export const getSingleDesignerPortfolioService = async (id) => {
+  const result = await DesignerPortfolio.findOne({_id: id});
   return result;
 };
 //delete portfolio
-export const deleteDesignerPortfolioService = async (designer, id) => {
-  const result = await DesignerPortfolio.findOneAndDelete({designer, _id: id});
+export const deleteDesignerPortfolioService = async (id) => {
+  const result = await DesignerPortfolio.findOneAndDelete({_id: id});
+
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, "portfolio couldn't be deleted!");
   }

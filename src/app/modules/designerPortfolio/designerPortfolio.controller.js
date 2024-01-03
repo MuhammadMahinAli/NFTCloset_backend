@@ -29,8 +29,8 @@ export const getDesignerAllPortfolios = catchAsync(async (req, res, next) => {
 });
 //------get designer single portfolio
 export const getDesignerSinglePortfolio = catchAsync(async (req, res, next) => {
-  const {designer, id} = req.query;
-  const result = await getSingleDesignerPortfolioService(designer, id);
+  const {id} = req.params;
+  const result = await getSingleDesignerPortfolioService( id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -41,8 +41,8 @@ export const getDesignerSinglePortfolio = catchAsync(async (req, res, next) => {
 });
 //------delete designer portfolio
 export const deleteDesignerPortfolio = catchAsync(async (req, res, next) => {
-  const {designer, id} = req.query;
-  const result = await deleteDesignerPortfolioService(designer, id);
+  const {id} = req.params;
+  const result = await deleteDesignerPortfolioService(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
