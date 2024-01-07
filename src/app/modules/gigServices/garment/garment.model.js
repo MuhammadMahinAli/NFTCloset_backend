@@ -21,12 +21,12 @@ const GarmentSchema = new Schema(
         type: String,
       },
     ],
-    software: [
+    softwares: [
       {
         type: String,
       },
     ],
-    purpose: [
+    purposes: [
       {
         type: String,
       },

@@ -49,6 +49,31 @@ const GigSchema = new Schema(
         type: String,
       },
     ],
+    extraFastDelivery: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    additionalItems: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    additionalColorWay: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    additionalRevision: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    includeMoodBoard: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -16,7 +16,7 @@ const PatternSchema = new Schema(
       type: String,
       required: true,
     },
-    software: [
+    softwares: [
       {
         type: String,
       },
