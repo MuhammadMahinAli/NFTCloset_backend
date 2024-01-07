@@ -21,16 +21,14 @@ const FullDesignSchema = new Schema(
         type: String,
       },
     ],
-    designExpertise: [
+    designExpertises: [
       {
         type: String,
       },
     ],
-    tailoringMethod: [
-      {
-        type: String,
-      },
-    ],
+    tailoringMethod: {
+      type: String,
+    },
   },
   {
     timestamps: true,

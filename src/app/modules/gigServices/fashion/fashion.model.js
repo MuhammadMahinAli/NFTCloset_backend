@@ -21,7 +21,7 @@ const FashionSchema = new Schema(
         type: String,
       },
     ],
-    illustrationPurpose: [
+    illustrationPurposes: [
       {
         type: String,
       },
