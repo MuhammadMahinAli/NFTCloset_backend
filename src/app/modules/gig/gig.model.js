@@ -32,18 +32,16 @@ const GigSchema = new Schema(
     },
     service: {
       type: Schema.Types.ObjectId,
-      required: true,
+      // required: true,
       ref: "TeckPack" || "FullDesign" || "Fashion" || "Garment" || "Pattern",
     },
     video: {
       type: String,
       required: true,
     },
-    documents: [
-      {
-        type: String,
-      },
-    ],
+    document: {
+      type: String,
+    },
     images: [
       {
         type: String,

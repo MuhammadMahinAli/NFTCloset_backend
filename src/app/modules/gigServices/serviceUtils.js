@@ -5,21 +5,23 @@ import {Pattern} from "./pattern/pattern.model.js";
 import {TechPack} from "./techPack/techPack.model.js";
 //creating gig service
 export const createService = async (service, session) => {
+  let result = null;
   if (service.title === "Technical Drawing and Tech Pack") {
-    const result = await TechPack.create([service], {session});
+    result = await TechPack.create([service], {session});
   }
   if (service.title === "Fashion Illustration") {
-    const result = await Fashion.create([service], {session});
+    result = await Fashion.create([service], {session});
   }
   if (service.title === "3D Garment Design") {
-    const result = await Garment.create([service], {session});
+    result = await Garment.create([service], {session});
   }
   if (service.title === "Pattern Making") {
-    const result = await Pattern.create([service], {session});
+    result = await Pattern.create([service], {session});
   }
   if (service.title === "Full Design Process") {
-    const result = await FullDesign.create([service], {session});
+    result = await FullDesign.create([service], {session});
   }
+  return result[0];
 };
 //updating gig service
 export const updateService = async (gig, service, session) => {

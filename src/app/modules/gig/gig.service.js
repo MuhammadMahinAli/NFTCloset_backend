@@ -18,15 +18,17 @@ export const createGigService = async (payload) => {
     res = result[0];
     //creating faq
     if (faqs) {
-      await Promise.all(faqs?.map(async (faq) => await addGigFaqService({gig: data?._id, ...faq, session})));
+      await Promise.all(faqs?.map(async (faq) => await addGigFaqService({gig: res?._id, ...faq, session})));
     }
     //creating package
     if (packages) {
-      await Promise.all(packages?.map(async (pack) => await addGigPackageService({gig: data?._id, ...pack, session})));
+      await Promise.all(packages?.map(async (pack) => await addGigPackageService({gig: res?._id, ...pack, session})));
     }
     //creating service
     if (service) {
-      await createService(service, session);
+      const newService = await createService({gig: res?._id, ...service, session});
+      res.service = newService._id;
+      await res.save({session});
     }
 
     await session.commitTransaction();
