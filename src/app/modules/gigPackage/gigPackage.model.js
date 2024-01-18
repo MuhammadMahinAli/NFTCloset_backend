@@ -21,16 +21,11 @@ const GigPackageSchema = new Schema(
       required: true,
     },
     revisions: {
-      type: String,
+      type: Number,
       required: true,
     },
     price: {
       type: Number,
-      required: true,
-    },
-
-    serviceType: {
-      type: String,
       required: true,
     },
   },
