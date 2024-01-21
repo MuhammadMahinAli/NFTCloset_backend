@@ -1,5 +1,5 @@
 import express from "express";
-import {addGigOrder, getAllGigOrder, getSingleGigOrder} from "./gigOrder.controller.js";
+import {addGigOrder, getAllGigOrder, getSingleGigOrder, updateGigOrderStatus} from "./gigOrder.controller.js";
 
 const router = express.Router();
 router.post("/", addGigOrder);
