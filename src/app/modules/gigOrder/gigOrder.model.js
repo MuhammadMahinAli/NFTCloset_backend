@@ -12,7 +12,11 @@ const GigOrderSchema = new Schema(
       required: true,
       ref: "User",
     },
-
+    designer: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     serviceType: {
       type: String,
       required: true,
@@ -20,6 +24,15 @@ const GigOrderSchema = new Schema(
     price: {
       type: Number,
       required: true,
+    },
+    dueDate: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Processing", "Complete", "Done"],
+      default: "Processing",
     },
   },
   {

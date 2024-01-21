@@ -24,6 +24,7 @@ import {GigRoutes} from "../modules/gig/gig.routes.js";
 import {GigReviewRoutes} from "../modules/gigReview/gigReview.routes.js";
 import {GigPackagesRoutes} from "../modules/gigPackage/gigPackage.routes.js";
 import {GigFaqRoutes} from "../modules/gigFaq/gigFaq.routes.js";
+import {GigOrdersRoutes} from "../modules/gigOrder/gigOrder.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -52,7 +53,7 @@ const moduleRoutes = [
   {path: "/gigReviews", route: GigReviewRoutes},
   {path: "/gigPackages", route: GigPackagesRoutes},
   {path: "/gigFaqs", route: GigFaqRoutes},
-  // {path: "/gigs", route: GigRoutes},
+  {path: "/gigOrders", route: GigOrdersRoutes},
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
 
