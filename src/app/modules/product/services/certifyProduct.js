@@ -2,9 +2,6 @@ import httpStatus from "http-status";
 import {ApiError} from "../../../../handleError/apiError.js";
 import {Product} from "../product.model.js";
 import {Artist} from "../../artist/artist.model.js";
-import {readFileSync, unlinkSync} from "fs";
-import {generatePDF} from "../../../../utils/generatePDF.js";
-import {generateMailOptions} from "../../../../utils/mailer.js";
 import mongoose from "mongoose";
 
 export const certifyProductService = async (payload) => {
@@ -20,20 +17,20 @@ export const certifyProductService = async (payload) => {
   try {
     session.startTransaction();
     //generating pdf of certificate
-    await generatePDF({name: `${artist?.name}`, itemName: product?.title});
-    const base64Pdf = readFileSync("certificate/certificate.pdf", {encoding: "base64"});
+    // await generatePDF({name: `${artist?.name}`, itemName: product?.title});
+    // const base64Pdf = readFileSync("certificate/certificate.pdf", {encoding: "base64"});
     //updating product
     product.certificateReq = "approved";
     product.certified = true;
     await product.save({session});
     //updating artist
-    artist.certificate = base64Pdf;
+    // artist.certificate = base64Pdf;
     await artist.save({session});
     //sending mail to the artist
-    const mailOptions = generateMailOptions({name: `${artist?.name}`, email: "isratkws@gmail.com"});
-    await transporter.sendMail(mailOptions);
-    //deleting pdf after send to artist
-    unlinkSync("certificate/certificate.pdf");
+    // const mailOptions = generateMailOptions({name: `${artist?.name}`, email: "isratkws@gmail.com"});
+    // await transporter.sendMail(mailOptions);
+    // //deleting pdf after send to artist
+    // unlinkSync("certificate/certificate.pdf");
     await session.commitTransaction();
     await session.endSession();
   } catch (error) {
