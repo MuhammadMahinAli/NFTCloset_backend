@@ -10,7 +10,11 @@ const GigPackageSchema = new Schema(
     packageName: {
       type: String,
       required: true,
-      enum: ["BASIC", "STANDARD", "PREMIUM"],
+      enum: ["Basic", "Standard", "Premium"],
+    },
+    title: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,

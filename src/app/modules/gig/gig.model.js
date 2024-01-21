@@ -37,7 +37,7 @@ const GigSchema = new Schema(
     },
     video: {
       type: String,
-      required: true,
+      // required: true,
     },
     document: {
       type: String,
@@ -68,6 +68,11 @@ const GigSchema = new Schema(
       default: false,
     },
     includeMoodBoard: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    technicalDrawing: {
       type: Boolean,
       required: true,
       default: false,
