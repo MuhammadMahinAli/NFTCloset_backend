@@ -14,12 +14,12 @@ export const addGigOrderService = async (payload) => {
 
 //get all order by user
 export const getAllGigOrderService = async (designer) => {
-  const orders = await GigOrder.find({designer});
+  const orders = await GigOrder.find({designer}).populate("gig");
   return orders;
 };
 //get single order
 export const getSingleGigOrderService = async (id) => {
-  const orders = await GigOrder.find({_id: id});
+  const orders = await GigOrder.find({_id: id}).populate("gig");
   return orders;
 };
 //update status

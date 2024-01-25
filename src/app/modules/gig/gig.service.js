@@ -43,12 +43,12 @@ export const createGigService = async (payload) => {
 };
 //get all gig
 export const getAllGigService = async (designer) => {
-  const gigs = await Gig.find({designer});
+  const gigs = await Gig.find({designer}).populate("designer").populate("service");
   return gigs;
 };
 //get single gig
 export const getSingleGigService = async (id) => {
-  const gig = await Gig.findOne({_id: id});
+  const gig = await Gig.findOne({_id: id}).populate("designer").populate("service");
   return gig;
 };
 //update gig
