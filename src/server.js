@@ -1,22 +1,25 @@
 import mongoose from "mongoose";
 import app from "./app.js";
 import config from "./config/index.js";
-import {recycleAutomation} from "./utils/automation.js";
+import {server, socketConnection} from "./socket.js";
 
+// const server = createServer(app);
 const port = config.port || 3000;
-let server;
+
 //uncaught exception handle
 process.on("uncaughtException", (err) => {
   console.log("uncaught exception", err);
   process.exit(1);
 });
+//connected socket
+socketConnection();
 //database connection
 export const db = async () => {
   try {
     await mongoose.connect(config.database_url);
 
     console.log("🚀 Database connected successfully");
-    server = app.listen(port, () => {
+    server.listen(port, () => {
       console.log(` App listening on port ${port}`);
       //for deleting old products after 30 days
       // recycleAutomation();
