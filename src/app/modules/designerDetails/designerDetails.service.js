@@ -23,15 +23,6 @@ export const addDesignerDetailsService = async (payload) => {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create DesignerDetails");
     }
     data = result[0];
-    // //creating eduction
-    // if (educations) {
-    //   await Promise.all(educations?.map(async (education) => await addDesignerEducationService({designer: data?._id, ...education, session})));
-    // }
-    // //creating certificate
-    // if (certificates) {
-    //   await Promise.all(certificates?.map(async (certificate) => await addDesignerCertificateService({designer: data?._id, ...certificate, session})));
-    // }
-
     await addDesignerEarningService({designer: data?._id}, session);
 
     await session.commitTransaction();
