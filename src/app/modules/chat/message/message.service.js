@@ -6,7 +6,6 @@ import {Message} from "./message.model.js";
 //----------create a new message
 export const createMessageService = async (payload) => {
   const {sender, receiver, message} = payload;
-
   // Check if a conversation already exists between sender and receiver
   let conversation = await Conversation.findOne({
     $or: [
