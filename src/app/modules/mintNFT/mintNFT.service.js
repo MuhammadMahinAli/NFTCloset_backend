@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import {MintNFT} from "./mintNFT.model.js";
 import {ApiError} from "../../../handleError/apiError.js";
 import config from "../../../config/index.js";
+import axios from "axios";
 
 //-------------mint an NFT
 export const createMintNFTService = async (data) => {
@@ -13,24 +14,27 @@ export const createMintNFTService = async (data) => {
   return newNFT;
 };
 
-//mint nft by croosmint
+//mint nft by crossmint
 export const mintNFTByCrossmintService = async (CID, wallet) => {
   const data = JSON.stringify({
+    compressed: true,
     recipient: `polygon:${wallet}`,
     metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
   });
   try {
-    const response = await fetch("https://staging.crossmint.com/api/2022-06-09/collections/default-polygon/nfts", {
+    const response = await axios({
+      url: "https://staging.crossmint.com/api/2022-06-09/collections/a84cf54e-bf5e-4a28-bb48-d99cf49c8347/nfts",
       method: "POST",
       headers: {
-        accept: "application/json",
-        "content-type": "application/json",
+        Accept: "application/json",
+        "Content-Type": "application/json",
         "x-client-secret": config.crossmint_client_secret,
         "x-project-id": config.crossmint_project_id,
       },
-      body: data,
+      data: data,
     });
-    const res = await response.json();
+
+    const res = response.data;
     console.log(JSON.stringify(res));
     return res;
   } catch (error) {
