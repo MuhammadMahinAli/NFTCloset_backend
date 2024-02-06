@@ -15,7 +15,7 @@ export const addGigFaqService = async (payload) => {
 //get all faqs
 export const getAllGigFaqsService = async (gig) => {
   const faqs = await GigFaq.find({gig});
-  return packages;
+  return faqs;
 };
 //get single faq
 export const getSingleGigFaqService = async (gig, id) => {

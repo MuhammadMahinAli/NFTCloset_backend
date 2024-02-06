@@ -27,8 +27,8 @@ export const createGigService = async (payload) => {
     //creating service
     if (service) {
       const newService = await createService({gig: res?._id, ...service, session});
-      res.service = newService._id;
-      await res.save({session});
+      // res.service = newService._id;
+      // await res.save({session});
     }
 
     await session.commitTransaction();
@@ -43,12 +43,12 @@ export const createGigService = async (payload) => {
 };
 //get all gig
 export const getAllGigService = async (designer) => {
-  const gigs = await Gig.find({designer}).populate("designer").populate("service");
+  const gigs = await Gig.find({designer}).populate("designer");
   return gigs;
 };
 //get single gig
 export const getSingleGigService = async (id) => {
-  const gig = await Gig.findOne({_id: id}).populate("designer").populate("service");
+  const gig = await Gig.findOne({_id: id}).populate("designer");
   return gig;
 };
 //update gig
