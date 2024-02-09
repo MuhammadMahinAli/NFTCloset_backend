@@ -17,19 +17,18 @@ export const createMintNFTService = async (data) => {
 //mint nft by crossmint
 export const mintNFTByCrossmintService = async (CID, wallet) => {
   const data = JSON.stringify({
-    compressed: true,
     recipient: `polygon:${wallet}`,
     metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
   });
   try {
     const response = await axios({
-      url: "https://staging.crossmint.com/api/2022-06-09/collections/a84cf54e-bf5e-4a28-bb48-d99cf49c8347/nfts",
+      url: "https://staging.crossmint.com/api/2022-06-09/collections/b4751742-3fb1-4ba9-9e37-a73498e50a8a/nfts",
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "x-client-secret": config.crossmint_client_secret,
-        "x-project-id": config.crossmint_project_id,
+        "X-API-KEY": config.crossmint_client_secret,
+        // "X-API-KEY": config.crossmint_project_id,
       },
       data: data,
     });
