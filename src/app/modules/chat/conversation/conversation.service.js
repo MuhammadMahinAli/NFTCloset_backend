@@ -6,12 +6,12 @@ import {Message} from "../message/message.model.js";
 import mongoose from "mongoose";
 
 export const getConversationsByDesignerService = async (designer) => {
-  const conversations = await Conversation.find({designer});
+  const conversations = await Conversation.find({designer}).populate("user").populate("designer");
   return conversations;
 };
 
 export const getConversationByParticipantsService = async (user, designer) => {
-  const conversation = await Conversation.findOne({user, designer});
+  const conversation = await Conversation.findOne({user, designer}).populate("user").populate("designer");
   return designer;
 };
 //delete conversation
