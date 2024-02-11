@@ -23,7 +23,7 @@ export const updateDesignerPortfolioService = async (payload) => {
 };
 //get all portfolios
 export const getDesignerAllPortfolioService = async (designer) => {
-  const result = await DesignerPortfolio.find({designer});
+  const result = await DesignerPortfolio.find({designer}).sort({createdAt: "desc"});
   return result;
 };
 //get single portfolio

@@ -17,14 +17,22 @@ export const createProductService = async (body) => {
     const productID = await generateProductID();
     //generate how versions property added to product
     const versions = generateVersionProperty(bodyVersions);
-    const data = {productID, versions, ...payload};
+    let data;
+    if (payload?.collections?.collectionID) {
+      data = {productID, versions, ...payload};
+    } else {
+      const {collections, ...others} = payload;
+      data = {productID, versions, ...others};
+    }
     const newProduct = await Product.create([data], {session});
     if (!newProduct?.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create product");
     }
     //adding this product to its collection
     const newProductId = newProduct[0]?._id;
-    await addProductToCollections(payload?.collections, newProductId, session);
+    if (payload?.collections?.collectionID) {
+      await addProductToCollections(payload?.collections, newProductId, session);
+    }
     //adding this product to the versions
     await addProductToDifferentVersions(newProductId, bodyVersions, session);
     newProductData = newProduct[0];

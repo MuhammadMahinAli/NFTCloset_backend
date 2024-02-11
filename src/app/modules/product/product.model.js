@@ -30,15 +30,15 @@ const ProductSchema = new Schema(
         type: {
           name: {
             type: String,
-            required: true,
+            // required: true,
           },
           collectionID: {
             type: Schema.Types.ObjectId,
-            required: true,
+            // required: true,
             ref: "Collection",
           },
         },
-        required: true,
+        // required: true,
       },
     ],
     colors: [
