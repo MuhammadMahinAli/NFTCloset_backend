@@ -49,8 +49,8 @@ export const getAllNFTService = async (wallet) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        "X-CLIENT-SECRET": config.crossmint_client_secret,
-        "X-PROJECT-ID": config.crossmint_project_id,
+        "X-API-KEY": config.crossmint_client_secret,
+        // "X-PROJECT-ID": config.crossmint_project_id,
       },
     };
     const result = await fetch(url, options);
