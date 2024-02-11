@@ -33,7 +33,6 @@ export const addProductToCartService = async (user, newProduct) => {
   const existingCart = await Cart.findOne({user: user});
   //checking product exist
   const productExist = existingCart?.products?.find((product) => product?.productID.toString() === newProduct?.productID.toString());
-  console.log(productExist);
   let result = null;
   if (!existingCart) {
     const cartData = {
@@ -56,7 +55,6 @@ export const addProductToCartService = async (user, newProduct) => {
       {new: true}
     );
   } else {
-    console.log(hi);
     result = await Cart.findOneAndUpdate(
       {user: user},
       {$push: {products: newProduct}},

@@ -12,7 +12,7 @@ export const getConversationsByDesignerService = async (designer) => {
 
 export const getConversationByParticipantsService = async (user, designer) => {
   const conversation = await Conversation.findOne({user, designer}).populate("user").populate("designer");
-  return designer;
+  return conversation;
 };
 //delete conversation
 export const deleteConversationService = async (user, designer) => {
