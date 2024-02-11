@@ -6,7 +6,7 @@ export const server = createServer(app);
 export const socketConnection = () => {
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: "https://www.nftclosetx.com",
       methods: ["GET", "POST"],
     },
   });
