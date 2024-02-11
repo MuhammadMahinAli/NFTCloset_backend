@@ -17,7 +17,7 @@ export const getAllGigPackageService = async (gig) => {
   const packages = await GigPackage.find({gig});
   return packages;
 };
-//get single package
+//get single packages
 export const getSingleGigPackageService = async (gig, packageName) => {
   const pack = await GigPackage.findOne({gig, packageName});
   return pack;
