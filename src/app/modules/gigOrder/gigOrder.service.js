@@ -22,6 +22,11 @@ export const getGigOrderByBuyerService = async (buyer) => {
   const orders = await GigOrder.find({buyer}).populate("gig").populate("buyer").populate("designer");
   return orders;
 };
+//get all order by buyer
+export const getGigOrderByStatusService = async (id, status) => {
+  const orders = await GigOrder.find({_id: id, status: status}).populate("gig").populate("buyer").populate("designer");
+  return orders;
+};
 //get single order
 export const getSingleGigOrderService = async (id) => {
   const orders = await GigOrder.find({_id: id}).populate("gig").populate("buyer").populate("designer");
