@@ -31,3 +31,8 @@ export const updateGigOrderStatusService = async (payload) => {
 
   return result;
 };
+//delete  order
+export const deleteGigOrderService = async (id) => {
+  const res = await GigOrder.findOneAndDelete({_id: id});
+  return res;
+};

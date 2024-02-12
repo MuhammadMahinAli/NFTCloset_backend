@@ -31,7 +31,7 @@ const GigOrderSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["Processing", "Complete", "Done"],
+      enum: ["Processing", "Complete", "Cancelled"],
       default: "Processing",
     },
   },

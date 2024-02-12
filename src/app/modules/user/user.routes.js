@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/signup", validateRequest(createUserZodSchema), createUser);
 router.get("/getAll", getAllUsers);
 router.get("/getsingle/:email", getSingleUser);
+router.get("/getsingleById/:id", getSingleUser);
 router.get("/getuserbyRole/:role", getSingleUserByRole);
 router.patch("/:id", validateRequest(updateUserZodSchema), updateUser);
 router.delete("/delete/:id", deleteUser);
