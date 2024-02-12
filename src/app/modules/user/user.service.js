@@ -25,7 +25,7 @@ export const getSingleUserService = async (email) => {
 };
 //get single user
 export const getSingleUserByIdService = async (id) => {
-  const user = await User.findOne({_id:id});
+  const user = await User.findOne({_id: id});
   return user;
 };
 //get user by role
