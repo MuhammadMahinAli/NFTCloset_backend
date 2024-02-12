@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {addGigOrderService, deleteGigOrderService, getAllGigOrderService, getSingleGigOrderService, updateGigOrderStatusService} from "./gigOrder.service.js";
+import {addGigOrderService, deleteGigOrderService, getAllGigOrderService, getGigOrderByBuyerService, getSingleGigOrderService, updateGigOrderStatusService} from "./gigOrder.service.js";
 //------add order
 export const addGigOrder = catchAsync(async (req, res, next) => {
   const result = await addGigOrderService(req?.body);
@@ -16,6 +16,18 @@ export const addGigOrder = catchAsync(async (req, res, next) => {
 export const getAllGigOrder = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const result = await getAllGigOrderService(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Gig orders retrived successfully!",
+    data: result,
+  });
+});
+//------get gig order by buyer
+export const getGigOrderByBuyer = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  const result = await getGigOrderByBuyerService(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
