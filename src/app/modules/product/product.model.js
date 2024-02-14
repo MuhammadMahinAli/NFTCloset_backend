@@ -19,7 +19,7 @@ const ProductSchema = new Schema(
     sku: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     quantity: {
       type: Number,
@@ -113,22 +113,12 @@ const ProductSchema = new Schema(
       type: Number,
     },
     image: {type: String},
-    // volume: {
-    //   type: String,
-    // },
-    // dimension: {
-    //   type: String,
-    // },
+
     addedBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    // addStatus: {
-    //   type: String,
-    //   default: "pending",
-    //   enum: ["pending", "approved", "rejected"],
-    // },
     market_X: {
       type: Boolean,
       required: true,
