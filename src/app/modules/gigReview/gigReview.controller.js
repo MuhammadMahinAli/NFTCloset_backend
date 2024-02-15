@@ -1,6 +1,7 @@
+import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {addGigReviewService, deleteGigReviewService, getAllGigReviewService, getSingleGigReviewService, updateGigReviewService} from "./gigReview.service.js";
+import {addGigReviewService, deleteGigReviewService, getAllGigReviewService, getGigReviewByDesignerService, getSingleGigReviewService, updateGigReviewService} from "./gigReview.service.js";
 //add review
 export const addGigReview = catchAsync(async (req, res, next) => {
   const result = await addGigReviewService(req?.body);
@@ -24,6 +25,19 @@ export const getAllGigReview = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
+//------get all gig review by designer
+export const getGigReviewByDesigner = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  const result = await getGigReviewByDesignerService(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Gig review retrived successfully!",
+    data: result,
+  });
+});
+
 //------get single gig review
 export const getSingleGigReview = catchAsync(async (req, res, next) => {
   const {gig, reviewId} = req?.query;

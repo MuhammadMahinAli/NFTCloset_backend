@@ -12,6 +12,11 @@ const GigReviewSchema = new Schema(
       required: true,
       ref: "User",
     },
+    designer: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     gigOrder: {
       type: Schema.Types.ObjectId,
       required: true,
