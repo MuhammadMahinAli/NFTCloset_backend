@@ -113,6 +113,7 @@ const ProductSchema = new Schema(
       type: Number,
     },
     image: {type: String},
+    images: [{type: String}],
 
     addedBy: {
       type: Schema.Types.ObjectId,

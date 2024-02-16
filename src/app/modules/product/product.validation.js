@@ -42,6 +42,7 @@ export const createProductZodSchema = z.object({
           )
           .optional(),
         owners: z.array(z.string()).optional(),
+        images: z.array(z.string()).optional(),
         image: z.string().optional(),
 
         // volume: z.string().optional(),
