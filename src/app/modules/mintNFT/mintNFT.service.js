@@ -19,6 +19,7 @@ export const mintNFTByCrossmintService = async (CID, wallet) => {
   const data = JSON.stringify({
     recipient: `polygon:${wallet}`,
     metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
+    supply: {limit: 10},
   });
   try {
     const response = await axios({
