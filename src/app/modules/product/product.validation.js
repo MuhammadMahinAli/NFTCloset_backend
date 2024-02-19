@@ -59,6 +59,7 @@ export const createProductZodSchema = z.object({
 
         addedBy: z.string({required_error: "Added by is required"}),
       }),
+      nft: z.string().optional(),
       artist: z
         .object({
           name: z.string().optional(),

@@ -45,26 +45,19 @@ export const mintNFTByCrossmintService = async (CID, wallet) => {
 //0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1
 export const getAllNFTService = async (wallet) => {
   try {
-    // const url = `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`;
-    // const options = {
+    const result = await MintNFT.find({listed: false});
+
+    // const result = await axios({
+    //   url: `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`,
     //   method: "GET",
     //   headers: {
     //     accept: "application/json",
     //     "X-API-KEY": config.crossmint_client_secret,
     //     "X-PROJECT-ID": config.crossmint_project_id,
     //   },
-    // };
-    const result = await axios({
-      url: `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`,
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        "X-API-KEY": config.crossmint_client_secret,
-        "X-PROJECT-ID": config.crossmint_project_id,
-      },
-    });
+    // });
 
-    return result.data;
+    return result;
   } catch (error) {
     console.log(error);
     throw new ApiError(httpStatus.BAD_REQUEST, "Cannot get NFTs!");

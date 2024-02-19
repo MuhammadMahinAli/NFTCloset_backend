@@ -6,10 +6,11 @@ import httpStatus from "http-status";
 import {ApiError} from "../../../../handleError/apiError.js";
 import {addProductToCollections} from "../../collection/collection.utils.js";
 import {createArtistService} from "../../artist/artist.service.js";
+import {MintNFT} from "../../mintNFT/mintNFT.model.js";
 
 //------create a new product
 export const createProductService = async (body) => {
-  const {payload, versions: bodyVersions, artist} = body;
+  const {payload, versions: bodyVersions, artist, nft} = body;
   let newProductData = null;
   const session = await mongoose.startSession();
   try {
@@ -28,6 +29,13 @@ export const createProductService = async (body) => {
     if (!newProduct?.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create product");
     }
+    //make this nft listed
+    const existingNFT = await MintNFT.findOne({_id: nft});
+    if (!existingNFT) {
+      throw new ApiError(httpStatus.NOT_FOUND, "NFT doesn't found");
+    }
+    existingNFT.listed = true;
+    existingNFT.save({session});
     //adding this product to its collection
     const newProductId = newProduct[0]?._id;
     if (payload?.collections?.collectionID) {

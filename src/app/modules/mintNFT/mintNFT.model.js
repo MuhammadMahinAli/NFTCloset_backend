@@ -23,6 +23,12 @@ const MintNFTSchema = new Schema(
       type: Number,
       required: true,
     },
+
+    listed: {
+      type: Boolean,
+      // required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
