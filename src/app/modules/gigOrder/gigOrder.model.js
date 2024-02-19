@@ -34,7 +34,13 @@ const GigOrderSchema = new Schema(
       enum: ["Processing", "Complete", "Cancelled"],
       default: "Processing",
     },
+    payment: {
+      type: String,
+      enum: ["Unpaid", "Paid"],
+      default: "Unpaid",
+    },
   },
+
   {
     timestamps: true,
   }
