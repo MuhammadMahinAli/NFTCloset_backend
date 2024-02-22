@@ -17,8 +17,8 @@ export const createMintNFT = catchAsync(async (req, res, next) => {
 });
 // //------ minted nft by crossmint
 export const mintNFTByCrossmint = catchAsync(async (req, res, next) => {
-  const {CID, wallet} = req.body;
-  const result = await mintNFTByCrossmintService(CID, wallet);
+  const {CID, wallet, supply} = req.body;
+  const result = await mintNFTByCrossmintService(CID, wallet, supply);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

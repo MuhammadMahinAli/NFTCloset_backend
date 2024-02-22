@@ -23,6 +23,10 @@ const MintNFTSchema = new Schema(
       type: Number,
       required: true,
     },
+    supply: {
+      type: Number,
+      // required: true,
+    },
 
     listed: {
       type: Boolean,

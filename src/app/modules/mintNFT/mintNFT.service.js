@@ -15,11 +15,11 @@ export const createMintNFTService = async (data) => {
 };
 
 //mint nft by crossmint
-export const mintNFTByCrossmintService = async (CID, wallet) => {
+export const mintNFTByCrossmintService = async (CID, wallet, supply) => {
   const data = JSON.stringify({
     recipient: `polygon:${wallet}`,
     metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
-    supply: {limit: 10},
+    supply: {limit: supply},
   });
   try {
     const response = await axios({
