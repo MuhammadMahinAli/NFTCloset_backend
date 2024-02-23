@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import {catchAsync} from "../../../utils/catchAsync.js";
 import {sendResponse} from "../../../utils/sendResponse.js";
-import {addGigOrderService, deleteGigOrderService, getAllGigOrderService, getGigOrderByBuyerService, getGigOrderByStatusService, getSingleGigOrderService, updateGigOrderStatusService} from "./gigOrder.service.js";
+import {addGigOrderService, deleteGigOrderService, getAllGigOrderService, getGigOrderByBuyerService, getGigOrderByStatusService, getSingleGigOrderService, makePaymentService, updateGigOrderStatusService} from "./gigOrder.service.js";
 //------add order
 export const addGigOrder = catchAsync(async (req, res, next) => {
   const result = await addGigOrderService(req?.body);
@@ -77,6 +77,16 @@ export const deleteGigOrder = catchAsync(async (req, res, next) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Delete Gig order successfully!",
+    data: result,
+  });
+});
+//------make payment
+export const makePayment = catchAsync(async (req, res, next) => {
+  const result = await makePaymentService(req?.body?.products);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Make payment successfully!",
     data: result,
   });
 });
