@@ -19,7 +19,7 @@ export const mintNFTByCrossmintService = async (CID, wallet, supply) => {
   const data = JSON.stringify({
     recipient: `polygon:${wallet}`,
     metadata: `https://gateway.pinata.cloud/ipfs/${CID}`,
-    supply: {limit: supply},
+    supplyLimit: supply,
   });
   try {
     const response = await axios({
@@ -46,6 +46,7 @@ export const mintNFTByCrossmintService = async (CID, wallet, supply) => {
 export const getAllNFTService = async (wallet) => {
   try {
     const result = await MintNFT.find({listed: false});
+    // staging.crossmint.com/api/2022-06-09/collections/b4751742-3fb1-4ba9-9e37-a73498e50a8a/nfts'
 
     // const result = await axios({
     //   url: `https://staging.crossmint.com/api/v1-alpha1/wallets/polygon:${wallet}/nfts`,

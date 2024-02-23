@@ -12,6 +12,9 @@ export const createMintNFTZodSchema = z.object({
       price: z.number({
         required_error: "price is required",
       }),
+      supply: z.number({
+        required_error: "Supply is required",
+      }),
 
       artist: z.string({
         required_error: "artist is required",
