@@ -9,6 +9,7 @@ import {AuctionRoutes} from "../modules/auction/auction.routes.js";
 import {CartRoutes} from "../modules/cart/cart.routes.js";
 import {DropRoutes} from "../modules/drop/drop.routes.js";
 import {MintNFTRoutes} from "../modules/mintNFT/mintNFT.routes.js";
+import {NftMintRoutes} from "../modules/nftMint/nftMint.routes.js";
 import {NotificationRoutes} from "../modules/notification/notification.routes.js";
 import {OfferRoutes} from "../modules/offer/offer.routes.js";
 import {OrderRoutes} from "../modules/order/order.routes.js";
@@ -28,6 +29,7 @@ const moduleRoutes = [
   {path: "/cart", route: CartRoutes},
   {path: "/drop", route: DropRoutes},
   {path: "/mintNFT", route: MintNFTRoutes},
+  {path: "/nftMint", route: NftMintRoutes},
   {path: "/notification", route: NotificationRoutes},
   {path: "/offer", route: OfferRoutes},
   {path: "/order", route: OrderRoutes},
