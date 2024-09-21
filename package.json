@@ -23,7 +23,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
     "nodemailer": "^6.9.6",
-    "puppeteer": "^21.4.1",
+    "puppeteer": "^23.4.0",
     "zod": "^3.22.2"
   }
 }

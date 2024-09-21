@@ -7,9 +7,10 @@ const nftMintSchema = new Schema(
             required:true,
             ref:"User",
         },
-        // image:{
-        //     type:String
-        // },
+        image:{
+            type:String,
+            required: true,
+        },
         description: {
             type: String,
             required: true,
