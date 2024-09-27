@@ -33,5 +33,5 @@ const nftMintSchema = new Schema(
         }
 );
 
-// export nftMint model
+//---- export nft Mint model 
 export const NftMint = model("nftMint", nftMintSchema);
