@@ -12,6 +12,9 @@ export const storeMintedNftZodSchema = z.object({
       description: z.string({
         required_error: "Description is required",
       }),
+      copy: z.number({
+        required_error: "Price is required",
+      }),
       price: z.number({
         required_error: "Price is required",
       }),

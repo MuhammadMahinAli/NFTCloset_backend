@@ -19,6 +19,10 @@ const nftMintSchema = new Schema(
             type: String,
             required: true,
           },
+          copy: {
+            type: Number,
+            required: true,
+          },
           price: {
             type: Number,
             required: true,
